@@ -8,6 +8,7 @@ public class CraftingScript : MonoBehaviour {
 	//playerinventory
 	string[] PlayerInv = {"Water", "Oil", "Wine", "Herb", "Mushroom"};
 	int[] invcount = {0,0,0,0,0} ;
+	StatClass PlayerPTN;
 	
 	//POTION IMAGE
 	public GameObject POTIONprefab;
@@ -152,7 +153,7 @@ public class CraftingScript : MonoBehaviour {
 		cauldronCD = potion.SPD;
 		cauldronCD -= Time.deltaTime;
 		POTIONprefab.GetComponent<SpriteRenderer>().sprite = CURE;
-		giveHero(potion);
+		PlayerPTN = potion;
 		
 		}
 
@@ -162,11 +163,11 @@ public class CraftingScript : MonoBehaviour {
 
 	}	
 
-		//give potion to hero
+		/*give potion to hero
 		public void giveHero(StatClass Potion)
 		{
-			StatClass HeroPTN = Potion;
-		}
+			HeroPTN = Potion;
+		}*/
 		
 
 }
