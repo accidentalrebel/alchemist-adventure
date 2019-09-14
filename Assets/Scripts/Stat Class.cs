@@ -21,5 +21,5 @@ public class StatClass
 		this.PRICE = PRICE;
     }
 
-
+	
 }
