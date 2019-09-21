@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+
 
 public class QuestManager : MonoBehaviour {
 
@@ -9,9 +12,9 @@ public class QuestManager : MonoBehaviour {
     public List<Quest> currentQuestList = new List<Quest>();
  
 
-    void Awake()
+    /*void Awake()
     {
-        if(questManager = null)
+        if(questManager == null)
         {
             questManager = this;
         }
@@ -22,10 +25,13 @@ public class QuestManager : MonoBehaviour {
         }
 
         DontDestroyOnLoad(gameObject);
-    }
+    }*/
+
+
+    #region QuestStatus
 
     //Accept Quest
-   public void AcceptQuest(int questID)
+    public void AcceptQuest(int questID)
     {
         for (int i = 0; i < questList.Count; i++)
         {
@@ -73,6 +79,8 @@ public class QuestManager : MonoBehaviour {
 
         }
     }
+
+    #endregion
 
     #region QuestChecking
     public bool RequestAvailabeQuest(int questID)
