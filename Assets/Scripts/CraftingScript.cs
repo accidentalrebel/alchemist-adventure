@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using UnityEngine.EventSystems;
 
 public class CraftingScript : MonoBehaviour {
 	public 	List<StatClass> items;
@@ -9,14 +12,20 @@ public class CraftingScript : MonoBehaviour {
 	string[] PlayerInv = {"Water", "Oil", "Wine", "Herb", "Mushroom"};
 	int[] invcount = {0,0,0,0,0} ;
 	StatClass PlayerPTN;
+	bool haspotion = false;
 	
 	//POTION IMAGE
 	public GameObject POTIONprefab;
+	public Transform cauldron;
 	public Sprite HP;
 	public Sprite ATK;
 	public Sprite CURE;
 
-	
+	//VAR for selecting Ing
+	public TMP_Text[] itemText = new TMP_Text[3];
+	public Image[] itemImage = new Image[3];
+	string[] Item = new string[3];
+	public GameObject[] Box = new GameObject[3];
 	
 	// Use this for initialization
 	void Start () {
@@ -40,21 +49,22 @@ public class CraftingScript : MonoBehaviour {
 	}
 	
 	void Update () {
-			//player inventory
+			/*player inventory
 		for(int x = 0; x < 5; x++)
 		{
 			Debug.Log(PlayerInv[x]);
 			Debug.Log(invcount[x]);
-		}
+		}*/
 	}
 	//which potion is it
 	StatClass getitembyID(string Name)
 	{
 		foreach (StatClass item in items)
 		{
-			
-			if(item.NAME == name)
+			//Debug.Log(item.NAME + Name);
+			if(item.NAME == Name)
 			{
+				//Debug.Log(item.NAME);
 				return item;
 			}
 		}
@@ -64,104 +74,121 @@ public class CraftingScript : MonoBehaviour {
 	//asign potion
     public void Craft(string BASE, string frsting,string scnding)
     {
-		StatClass potion;
+		StatClass potion = null;
       if(BASE == "Water")
 		{
-		  if(frsting == "Herb")
-		  {
-			  potion = getitembyID("WTRhrb");
-		  }
-		  else if(frsting == "Mushroom")
-		  {
-			  potion = getitembyID("WTRpow");
-		  }
-		  else if(frsting == "Venom" && scnding != "")
-		  {
-			  potion = getitembyID("WTRVen");
-		  }
+			if(frsting == "Herb")
+			{
+			potion = getitembyID("WTRhrb");
+			POTIONprefab.GetComponent<Image>().sprite = HP;
+			}
+			else if(frsting == "Mushroom")
+			{
+			potion = getitembyID("WTRpow");
+			POTIONprefab.GetComponent<Image>().sprite = ATK;
+			}
+			else if(frsting == "Venom" && scnding != "")
+			{
+			potion = getitembyID("WTRVen");
+			POTIONprefab.GetComponent<Image>().sprite = CURE;
+		
+			}
 		  
 		}
 		else if(BASE == "Wine")
 		{
-		  if(frsting == "Herb")
-		  {
-			  potion = getitembyID("WINhrb");
-		  }
-		  else if(frsting == "Mushroom")
-		  {
-			  potion = getitembyID("WINpow");
-		  }
-		  else if(scnding == "Venom")
-		  {
-			  potion = getitembyID("WINVen");
-		  }
-		  
+			if(frsting == "Herb")
+			{
+				potion = getitembyID("WINhrb");
+				POTIONprefab.GetComponent<Image>().sprite = HP;
+			}
+			else if(frsting == "Mushroom")
+			{
+				potion = getitembyID("WINpow");
+				POTIONprefab.GetComponent<Image>().sprite = ATK;
+			}
+			else if(scnding == "Venom")
+			{
+				potion = getitembyID("WINVen");
+				POTIONprefab.GetComponent<Image>().sprite = CURE;
+		
+			}
+			  
 		}
 		else if(BASE == "Oil")
-		{	
+		{
 			int oilRDM;
 			oilRDM = Random.Range(0,2);
-		  if(frsting == "Herb")
-		  {
-			  potion = getitembyID("OILhrb");
-			  if(oilRDM == 0)
-			  {
-				  potion.HP = 0;
-			  }
-			  else if(oilRDM == 1)
-			  {
-				  potion.HP = 2;
-			  }
-			  else if(oilRDM == 2)
-			  {
-				  potion.HP = 4;
-			  }
-		POTIONprefab.GetComponent<SpriteRenderer>().sprite = HP;
-		  }
-		  else if(frsting == "Mushroom")
-		  {
-			  potion = getitembyID("OILpow");
-			  if(oilRDM == 0)
-			  {
-				  potion.PWR = 1;
-			  }
-			  else if(oilRDM == 1)
-			  {
-				  potion.PWR = 2;
-			  }
-			  else if(oilRDM == 2)
-			  {
-				  potion.PWR = 4;
-			  }
-		POTIONprefab.GetComponent<SpriteRenderer>().sprite = ATK;
-		  }
-		  else if(scnding == "Venom")
-		  {
-			  potion = getitembyID("OILVen");
-			  if(oilRDM == 0)
-			  {
-				  potion.STATUS = "NA";
-			  }
-			  else if(oilRDM == 1)
-			  {
-				  potion.STATUS = "PSN";
-			  }
-			  else if(oilRDM == 2)
-			  {
-				  potion.STATUS = "PSNRES";
-			  }
-		cauldronCD = potion.SPD;
-		cauldronCD -= Time.deltaTime;
-		POTIONprefab.GetComponent<SpriteRenderer>().sprite = CURE;
-		PlayerPTN = potion;
+		  
+		  
+		
+		if(frsting == "Herb")
+		{
+			potion = getitembyID("OILhrb");
+			
+			if(oilRDM == 0)
+			{
+			potion.HP = 0;
+			}
+			else if(oilRDM == 1)
+			{
+			potion.HP = 2;
+			}
+			else if(oilRDM == 2)
+			{
+			potion.HP = 4;
+			}
+			POTIONprefab.GetComponent<Image>().sprite = HP;
+		}
+		else if(frsting == "Mushroom")
+		{
+			potion = getitembyID("OILpow");
+			if(oilRDM == 0)
+			{
+			potion.PWR = 1;
+			}
+			else if(oilRDM == 1)
+			{
+			potion.PWR = 2;
+			}
+			else if(oilRDM == 2)
+			{
+			potion.PWR = 4;
+			}
+			POTIONprefab.GetComponent<Image>().sprite = ATK;
+		}
+		else if(frsting == "Venom" && scnding != "")
+		{
+			potion = getitembyID("OILVen");
+			if(oilRDM == 0)
+			{
+			potion.STATUS = "NA";
+			}
+			else if(oilRDM == 1)
+			{
+			potion.STATUS = "PSN";
+			}
+			else if(oilRDM == 2)
+			{
+			potion.STATUS = "PSNRES";
+			}
+			POTIONprefab.GetComponent<Image>().sprite = CURE;
 		
 		}
-
-		POTIONprefab = Instantiate(POTIONprefab);
-
 		}
+		PlayerPTN = potion;		
+		//cauldron cooldown
+		cauldronCD = potion.SPD;
+		cauldronCD -= Time.deltaTime;
 
-	}	
+		//give player potion
+
+		//Debug.Log("Success " + BASE + frsting + scnding + PlayerPTN.NAME);
+	}
+		
+
+		
+		
 
 		/*give potion to hero
 		public void giveHero(StatClass Potion)
@@ -169,5 +196,39 @@ public class CraftingScript : MonoBehaviour {
 			HeroPTN = Potion;
 		}*/
 		
+		
+		
+		//selectin item.
+	
+		public void SelectBase()
+		{
+			for (int x = 0; x < 3; x++)
+			{
 
+			Item[x] = itemText[x].text;
+			Box[x].GetComponent<Image>().sprite = itemImage[x].sprite;
+			Debug.Log(Item[x]);
+
+			}
+		}
+		public void OnMix()
+		{
+			for (int x = 0; x < 3; x++)
+			{
+
+			Item[x] = itemText[x].text;
+			Box[x].GetComponent<Image>().sprite = itemImage[x].sprite;
+			Debug.Log(Item[x]);
+
+			}
+			if(haspotion == false)
+			{
+			Craft(Item[0],Item[1],Item[2]);
+			
+			
+			POTIONprefab = Instantiate(POTIONprefab);
+			POTIONprefab.transform.SetParent(cauldron);
+			POTIONprefab.transform.localPosition = new Vector2(1f,1f);
+			}
+		}
 }
