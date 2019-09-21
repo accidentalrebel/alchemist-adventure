@@ -8,10 +8,11 @@ public class StatClass
     public int HP;
     public int PWR;
     public string STATUS;
-    public int SPD;
+    public float SPD;
 	public int PRICE;
+	public float TIMER;
 
-    public StatClass(string NAME, int HP, int PWR, string STATUS, int SPD, int PRICE)
+    public StatClass(string NAME, int HP, int PWR, string STATUS, float SPD, int PRICE)
     {
         this.NAME = NAME;
         this.HP = HP;
