@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_Snake : Npc {
+public class Enemy_Snake : Battle_npc {
 	
 	public StatClass stats;
 

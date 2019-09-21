@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hero_Archer : Npc {
+public class Hero_Archer : Battle_npc {
 	
 	public StatClass stats;
 	

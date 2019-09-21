@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Npc : MonoBehaviour  {
+public class Battle_npc : MonoBehaviour  {
 	
 	public StatClass stats;
 	
