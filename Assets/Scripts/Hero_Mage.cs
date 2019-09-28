@@ -1,21 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Hero_Mage : Battle_npc {
 	
-	public StatClass stats;
-
-	// Use this for initialization
+	public TMP_Text hplabel; //for the HP Bar 
+	
 	void Start () {
 		
-		Setup(new StatClass ("Mage", 3, 7, "NA", 20f, 0));
+		Setup(new StatClass ("Mage", 3, 7, "NA", 20f, 0, 3));
 		
 		Debug.Log("mage ready");
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		base.Update();
+		
+		hplabel.text = "HP " + stats.HP + "/" + stats.MaxHP;
+		
 	}
+	
+	
+	
 }

@@ -1,21 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Enemy_Snake : Battle_npc {
 	
-	public StatClass stats;
+	//For the future HP Bar
+	//public TMP_Text hplabel;
 
-	// Use this for initialization
 	void Start () {
 		
-		Setup(new StatClass ("Snake", 20, 2, "NA", 18f, 0));
+		Setup(new StatClass ("Snake", 20, 2, "NA", 18f, 0, 20));
 		
 		Debug.Log("snake ready");
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		base.Update();
+		
+		//hplabel.text = "HP " + stats.HP + "/" + stats.MaxHP;
+		
 	}
 }

@@ -10,9 +10,12 @@ public class StatClass
     public string STATUS;
     public float SPD;
 	public int PRICE;
-	public float TIMER;
+	public int MaxHP;  //Added Max HP for HP Bars -Pam
+	public float TIMER; //Added Timer -Pam
+		
+	
 
-    public StatClass(string NAME, int HP, int PWR, string STATUS, float SPD, int PRICE)
+    public StatClass(string NAME, int HP, int PWR, string STATUS, float SPD, int PRICE, int MaxHP = 0)
     {
         this.NAME = NAME;
         this.HP = HP;
@@ -20,6 +23,7 @@ public class StatClass
         this.STATUS = STATUS;
         this.SPD = SPD;
 		this.PRICE = PRICE;
+		this.MaxHP = MaxHP;
     }
 
 	
