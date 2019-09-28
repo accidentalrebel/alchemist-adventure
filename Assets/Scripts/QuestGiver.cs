@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class QuestGiver : MonoBehaviour {
@@ -14,19 +15,18 @@ public class QuestGiver : MonoBehaviour {
 
     public int fameValue;
 
-     public void Start()
+    public void Start()
     {
-         fameValue = PlayerPrefs.GetInt("fame");
+       fameValue = PlayerPrefs.GetInt("fame");
+        Debug.Log("Fame Value: " + fameValue);
     }
-    
-
-
-    
 
     public TMP_Text questTitle;
     public TMP_Text questDescription;
     public TMP_Text fameReward;
     public TMP_Text goldReward;
+
+    public int enterRequirement;
 
     public void OpenQuestWindow()
     {
@@ -36,18 +36,28 @@ public class QuestGiver : MonoBehaviour {
         fameReward.text = quest.fameReward.ToString();
         goldReward.text = quest.goldReward.ToString();
 
+       
 
     }
        
     public void QuestAccepted()
     {
-        if (fameValue >= 0)
+        
+        enterRequirement = quest.enterRequirement;
+        Debug.Log("Enter Requirement: " + enterRequirement);
+        if (fameValue >= enterRequirement)
+            
         {
             questWindow.SetActive(false);
             quest.progress = Quest.QuestProgress.ACCEPTED;
+            SceneManager.LoadScene("PrepPhase");
+            Debug.Log("Prepartion Phase Loaded");
         }
 
-        else Debug.Log("Not enough Fame");
+        else if (fameValue < enterRequirement)
+        {
+            Debug.Log("Not enough Fame");
+        }
 
     }
 
