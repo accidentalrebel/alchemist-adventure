@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/QuestMenu.unity
+    guid: eeb0d57597a8cb64eaddb50f26c9e3f5
+  - enabled: 1
+    path: Assets/Scenes/PrepPhase.unity
+    guid: d9558e44c39d75a40bff09c6168c5d4e
   m_configObjects: {}
