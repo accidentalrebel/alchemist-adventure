@@ -1792,6 +1792,7 @@ MonoBehaviour:
   cauldronCD: 0
   POTIONprefab: {fileID: 1377960685995322, guid: fe1a17ee0f1f1e64bad3acfd135b6e81,
     type: 2}
+  cauldron: {fileID: 0}
   HP: {fileID: 21300000, guid: af448f9693bd85143ae467561cf0fc4e, type: 3}
   ATK: {fileID: 21300000, guid: e1ca0832e530e4049a49e9e9c0f60a2c, type: 3}
   CURE: {fileID: 21300000, guid: 0f3c293f1ad41df42bb3a868165051f5, type: 3}
@@ -5189,6 +5190,7 @@ GameObject:
   - component: {fileID: 1994471518}
   - component: {fileID: 1994471517}
   - component: {fileID: 1994471516}
+  - component: {fileID: 1994471519}
   m_Layer: 0
   m_Name: Menu
   m_TagString: Untagged
@@ -5253,7 +5255,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1994471517}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1994471519}
+        m_MethodName: questMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1994471517
@@ -5290,6 +5303,17 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1994471514}
   m_CullTransparentMesh: 0
+--- !u!114 &1994471519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1994471514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c266c8bbc03f6be4084734827327e3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2130889014
 GameObject:
   m_ObjectHideFlags: 0
