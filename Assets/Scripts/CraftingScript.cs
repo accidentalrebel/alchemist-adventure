@@ -350,6 +350,8 @@ public class CraftingScript : MonoBehaviour {
 			_instance.transform.SetParent(cauldron);
 			_instance.transform.localPosition = new Vector2(1f,1f);
 			haspotion = true;
+			Debug.Log("You made a " + PlayerPTN.NAME);
+			
 			//need visual indication for how much ingredients was used. (Eg, "-1" floating over used items or images of used items moving into the cauldron)
 			}
 			else if(haspotion == true)
