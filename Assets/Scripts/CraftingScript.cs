@@ -9,10 +9,11 @@ public class CraftingScript : MonoBehaviour {
 	public 	List<StatClass> items;
 	public float cauldronCD;
 	//playerinventory
-	string[] PlayerInv = {"Water", "Oil", "Wine", "Herb", "Mushroom"};
-	int[] invcount = {0,0,0,0,0} ;
+	string[] PlayerInv = {"Water", "Oil", "Wine", "Herb", "Mushroom","Venom"};
+	int[] invcount = {5,5,5,5,5,5} ;
 	StatClass PlayerPTN;
 	bool haspotion = false;
+	bool cancraft = false;
 	
 	//POTION IMAGE
 	public GameObject POTIONprefab;
@@ -81,19 +82,21 @@ public class CraftingScript : MonoBehaviour {
 			{
 			potion = getitembyID("WTRhrb");
 			POTIONprefab.GetComponent<Image>().sprite = HP;
+			invcount[3] -=1;
 			}
 			else if(frsting == "Mushroom")
 			{
 			potion = getitembyID("WTRpow");
 			POTIONprefab.GetComponent<Image>().sprite = ATK;
+			invcount[4] -=1;
 			}
 			else if(frsting == "Venom" && scnding != "")
 			{
 			potion = getitembyID("WTRVen");
 			POTIONprefab.GetComponent<Image>().sprite = CURE;
-		
+			invcount[5] -=1;
 			}
-		  
+		invcount[0] -=1;
 		}
 		else if(BASE == "Wine")
 		{
@@ -101,19 +104,21 @@ public class CraftingScript : MonoBehaviour {
 			{
 				potion = getitembyID("WINhrb");
 				POTIONprefab.GetComponent<Image>().sprite = HP;
+				invcount[3] -=1;
 			}
 			else if(frsting == "Mushroom")
 			{
 				potion = getitembyID("WINpow");
 				POTIONprefab.GetComponent<Image>().sprite = ATK;
+				invcount[4] -=1;
 			}
 			else if(scnding == "Venom")
 			{
 				potion = getitembyID("WINVen");
 				POTIONprefab.GetComponent<Image>().sprite = CURE;
-		
+				invcount[5] -=1;
 			}
-			  
+		invcount[2] -=1;  
 		}
 		else if(BASE == "Oil")
 		{
@@ -139,6 +144,7 @@ public class CraftingScript : MonoBehaviour {
 			potion.HP = 4;
 			}
 			POTIONprefab.GetComponent<Image>().sprite = HP;
+			invcount[3] -=1;
 		}
 		else if(frsting == "Mushroom")
 		{
@@ -156,6 +162,7 @@ public class CraftingScript : MonoBehaviour {
 			potion.PWR = 4;
 			}
 			POTIONprefab.GetComponent<Image>().sprite = ATK;
+			invcount[4] -=1;
 		}
 		else if(frsting == "Venom" && scnding != "")
 		{
@@ -173,8 +180,18 @@ public class CraftingScript : MonoBehaviour {
 			potion.STATUS = "PSNRES";
 			}
 			POTIONprefab.GetComponent<Image>().sprite = CURE;
+			invcount[5] -=1;
+			for(int x = 0; x < 6;x++)
+			{
+				if(scnding == PlayerInv[x])
+				{
+					invcount[x] -=1;
+				}
+			}
+			
 		
 		}
+		invcount[1] -=1;
 		}
 		PlayerPTN = potion;		
 		//cauldron cooldown
@@ -186,15 +203,36 @@ public class CraftingScript : MonoBehaviour {
 		//Debug.Log("Success " + BASE + frsting + scnding + PlayerPTN.NAME);
 	}
 		
-
+	
 		
-		
-
-		/*give potion to hero
-		public void giveHero(StatClass Potion)
+		/*public void HeroButton()
 		{
-			HeroPTN = Potion;
-		}*/
+			giveHero(Hero, PlayerPTN);
+		}
+		*/
+		
+	
+		public void giveHero(StatClass Hero, StatClass Potion)
+		{
+			if(Potion.STATUS == "POTION")
+			{
+				Hero.HP += Potion.HP;
+				Destroy (POTIONprefab);
+				haspotion = false;
+			}
+			else if(Potion.STATUS == "PSN")
+			{
+				Hero.STATUS = "NA";
+				Destroy (POTIONprefab);
+				haspotion = false;
+			}
+			else if(Potion.STATUS == "ATK")
+			{
+				Hero.PWR += Potion.PWR;
+				Destroy (POTIONprefab);
+				haspotion = false;
+			}
+		}
 		
 		
 		
@@ -221,7 +259,26 @@ public class CraftingScript : MonoBehaviour {
 			Debug.Log(Item[x]);
 
 			}
-			if(haspotion == false)
+			for (int x = 0; x < 6; x++)
+			{
+				for(int y = 0; y < 3; y++)
+				{
+					if(PlayerInv[x] == Item[y])
+					{
+						if(invcount[x] > 0)
+						{
+							cancraft = true;
+						}
+						else
+						{
+							cancraft = false;
+							Debug.Log("Not Enough " + Item[y]);
+							break;
+						}
+					}
+				}
+			}
+			if(haspotion == false&& cancraft == true &&cauldronCD<0)
 			{
 			Craft(Item[0],Item[1],Item[2]);
 			
@@ -229,6 +286,12 @@ public class CraftingScript : MonoBehaviour {
 			POTIONprefab = Instantiate(POTIONprefab);
 			POTIONprefab.transform.SetParent(cauldron);
 			POTIONprefab.transform.localPosition = new Vector2(1f,1f);
+			haspotion = true;
 			}
+			else 
+			{
+				Debug.Log("Plz us potion");
+			}
+			
 		}
 }

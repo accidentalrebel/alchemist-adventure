@@ -1792,6 +1792,7 @@ MonoBehaviour:
   cauldronCD: 0
   POTIONprefab: {fileID: 1377960685995322, guid: fe1a17ee0f1f1e64bad3acfd135b6e81,
     type: 2}
+  cauldron: {fileID: 618387861}
   HP: {fileID: 21300000, guid: af448f9693bd85143ae467561cf0fc4e, type: 3}
   ATK: {fileID: 21300000, guid: e1ca0832e530e4049a49e9e9c0f60a2c, type: 3}
   CURE: {fileID: 21300000, guid: 0f3c293f1ad41df42bb3a868165051f5, type: 3}
@@ -1866,6 +1867,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 861584284}
     m_Modifications:
+    - target: {fileID: 114715263533192202, guid: 84429796a523640489cf70665de89d7b,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 224370003374108312, guid: 84429796a523640489cf70665de89d7b,
         type: 2}
       propertyPath: m_LocalPosition.x
@@ -1996,6 +2002,21 @@ Prefab:
       propertyPath: m_textInfo.pageCount
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114715263533192202, guid: 84429796a523640489cf70665de89d7b,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114715263533192202, guid: 84429796a523640489cf70665de89d7b,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114715263533192202, guid: 84429796a523640489cf70665de89d7b,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 618387860}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84429796a523640489cf70665de89d7b, type: 2}
   m_IsPrefabAsset: 0
