@@ -17,6 +17,11 @@ public class Hero_Knight : Battle_npc {
 	void Update () {
 		base.Update();
 		
-		hplabel.text = "HP " + stats.HP + "/" + stats.MaxHP; 
+		if (stats.HP <= 0) {
+			hplabel.text = "HP " + 0 + "/" + stats.MaxHP;
+		}
+		if (stats.HP >= 1) {
+			hplabel.text = "HP " + stats.HP + "/" + stats.MaxHP;
+		}
 	}
 }

@@ -6,8 +6,7 @@ public class Battle_npc : MonoBehaviour  {
 	
 	//References
 	public StatClass stats;
-	public SpriteRenderer timerBar;
-	public float originalXPosition;
+	public Timerbar timerbar;
 	public Battle_npc[] heroes;
 	public Battle_npc enemy;
   
@@ -20,8 +19,7 @@ public class Battle_npc : MonoBehaviour  {
 	void Start() {
 		
 		Debug.Log("battle start");
-		originalXPosition = timerBar.transform.localPosition.x;
-			
+
 	}
 
 	protected void Update () {
@@ -29,6 +27,7 @@ public class Battle_npc : MonoBehaviour  {
 			return;
 		}
 		
+		//Turns
 		stats.TIMER -= Time.deltaTime;
 		
 		if ( stats.TIMER <= 0 ) {
@@ -40,6 +39,7 @@ public class Battle_npc : MonoBehaviour  {
 				OnAttackHero();
 			}
 			
+			
 			//Enemy Attacks
 			if ( this.gameObject.tag == "Enemy") {
 				OnAttackEnemy();
@@ -49,7 +49,13 @@ public class Battle_npc : MonoBehaviour  {
 		}
 		
 		//Timer Bar
-		timerBar.transform.localScale = new Vector3 (((stats.TIMER/stats.SPD)*0.19f), 0.02f, 0.2f);
+		timerbar.SetSize((stats.TIMER/stats.SPD));
+		
+		//Damage and Death
+		if (stats.HP <= 0 ) {
+			Death();
+		}
+
 		
 		
 	}
@@ -63,17 +69,16 @@ public class Battle_npc : MonoBehaviour  {
 	
 	public void OnAttackEnemy () {
 		
-		heroes[Random.Range(0,2)].stats.HP -= this.stats.PWR;
+		heroes[Random.Range(0,3)].stats.HP -= this.stats.PWR;
 		Debug.Log(stats.NAME + " attacked the hero");
 		
 	}
 	
 	public void Death() {
- 
-		if(stats.HP <= 0)
-		{
-          Destroy(this.gameObject);
-		}
+
+        Destroy(this.gameObject);
+		Debug.Log ( stats.NAME + "is dead");
+		
 	}
 	
 	
