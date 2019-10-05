@@ -48,6 +48,19 @@ public class CraftingScript : MonoBehaviour {
 		items.Add(new StatClass("WTRVen", 0, 0, "PSN", 15, 0));
 		items.Add(new StatClass("WINVen", 0, 0, "PSNRES", 15, 0));
 		items.Add(new StatClass("OILVen", 0, 0, "PSN", 15, 0));
+		
+		//ingredient class needed
+		/*for (int x = 0; x < 6;x ++);
+		{
+			for (int y = 0; y < ingredient.Count; y++)
+			{
+				if(ingredient[y].Name? == PlayerInv[x])
+				{				
+					invcount[x] = ingredient[y].amount?;
+				}
+			}
+		}*/
+			
 	}
 	
 	void Update () {
