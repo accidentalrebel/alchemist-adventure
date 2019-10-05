@@ -101,6 +101,14 @@ public class CraftingScript : MonoBehaviour {
 			potion = getitembyID("WTRVen");
 			POTIONprefab.GetComponent<Image>().sprite = CURE;
 			invcount[5] -=1;
+			for(int x = 0; x < 6;x++)
+				{
+
+					if(scnding == PlayerInv[x])
+					{
+						invcount[x] -=1;
+					}
+				}
 			}
 		invcount[0] -=1;
 		}
@@ -118,11 +126,19 @@ public class CraftingScript : MonoBehaviour {
 				POTIONprefab.GetComponent<Image>().sprite = ATK;
 				invcount[4] -=1;
 			}
-			else if(scnding == "Venom")
+			else if(frsting == "Venom")
 			{
 				potion = getitembyID("WINVen");
 				POTIONprefab.GetComponent<Image>().sprite = CURE;
 				invcount[5] -=1;
+				for(int x = 0; x < 6;x++)
+				{
+
+					if(scnding == PlayerInv[x])
+					{
+						invcount[x] -=1;
+					}
+				}
 			}
 		invcount[2] -=1;  
 		}
@@ -190,6 +206,7 @@ public class CraftingScript : MonoBehaviour {
 			invcount[5] -=1;
 			for(int x = 0; x < 6;x++)
 			{
+
 				if(scnding == PlayerInv[x])
 				{
 					invcount[x] -=1;
