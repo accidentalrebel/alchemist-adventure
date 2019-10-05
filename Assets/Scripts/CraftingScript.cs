@@ -165,7 +165,44 @@ public class CraftingScript : MonoBehaviour {
 		//give potion to hero
 		public void giveHero(StatClass Potion)
 		{
-			StatClass HeroPTN = Potion;
+			Destroy(_instance);
+			haspotion = false;
+		}
+		
+		
+	
+		public void UsePotion(StatClass Hero, StatClass Potion)
+		{
+			if(Potion.STATUS == "POTION")
+			{
+				Hero.HP += Potion.HP;
+				Destroy (_instance);
+				haspotion = false;
+				//need limiter to not exceed maxHP
+			}
+			else if(Potion.STATUS == "PSN")
+			{
+				Hero.STATUS = "NA";
+				Destroy (_instance);
+				haspotion = false;
+			}
+			else if(Potion.STATUS == "PSNRES")
+			{
+				Hero.STATUS = "PSNRES";
+				//resistance only lasts 1 turn
+			}				
+			else if(Potion.STATUS == "ATK")
+			{
+				Hero.PWR += Potion.PWR;
+				Destroy (_instance);
+				haspotion = false;
+				//need variable to reset PWR to normal after next attack
+			}
+			else if(Potion.STATUS == "NA")
+			{
+				Destroy (_instance);
+				Debug.Log("Nothing happened);
+			}
 		}
 		
 
