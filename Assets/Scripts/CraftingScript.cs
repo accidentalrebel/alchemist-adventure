@@ -297,7 +297,7 @@ public class CraftingScript : MonoBehaviour {
 			else if(Potion.STATUS == "NA")
 			{
 				Destroy (_instance);
-				Debug.Log("Nothing happened);
+				Debug.Log("Nothing happened");
 			}
 			
 		}
