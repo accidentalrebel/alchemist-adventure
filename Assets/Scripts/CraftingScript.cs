@@ -8,14 +8,14 @@ using UnityEngine.EventSystems;
 public class CraftingScript : MonoBehaviour {
 	public 	List<StatClass> items;
 	public float cauldronCD;
-	//playerinventory
+	//playerinventory need to be changed based on quest selection
 	string[] PlayerInv = {"Water", "Oil", "Wine", "Herb", "Mushroom","Venom"};
 	int[] invcount = {5,5,5,5,5,5} ;
 	StatClass PlayerPTN;
 	bool haspotion = false;
 	bool cancraft = true;
 	
-	//POTION IMAGE
+	//For Potion instance
 	private GameObject _instance;
 	public GameObject POTIONprefab;
 	public Transform cauldron;
@@ -23,7 +23,7 @@ public class CraftingScript : MonoBehaviour {
 	public Sprite ATK;
 	public Sprite CURE;
 
-	//VAR for selecting Ing
+	//For selecting Ingredient
 	public TMP_Text[] itemText = new TMP_Text[3];
 	public Image[] itemImage = new Image[3];
 	string[] Item = new string[3];
