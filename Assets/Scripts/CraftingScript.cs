@@ -42,9 +42,9 @@ public class CraftingScript : MonoBehaviour {
 		items.Add(new StatClass("WTRhrb", 2, 0, "POTION", 10, 0));
 		items.Add(new StatClass("OILhrb", 2, 0, "POTION", 10, 0));
 		items.Add(new StatClass("WINhrb", 4, 0, "POTION", 10, 0));
-		items.Add(new StatClass("WTRpow", 0, 2, "POTION", 15, 0));
-		items.Add(new StatClass("OILpow", 0, 2, "POTION", 15, 0));
-		items.Add(new StatClass("WINpow", 0, 3, "POTION", 15, 0));
+		items.Add(new StatClass("WTRpow", 0, 1, "ATK", 15, 0));
+		items.Add(new StatClass("OILpow", 0, 2, "ATK", 15, 0));
+		items.Add(new StatClass("WINpow", 0, 3, "ATK", 15, 0));
 		items.Add(new StatClass("WTRVen", 0, 0, "PSN", 15, 0));
 		items.Add(new StatClass("WINVen", 0, 0, "PSNRES", 15, 0));
 		items.Add(new StatClass("OILVen", 0, 0, "PSN", 15, 0));
@@ -272,14 +272,14 @@ public class CraftingScript : MonoBehaviour {
 			if(Potion.STATUS == "POTION")
 			{
 				Hero.HP += Potion.HP;
-				Destroy (POTIONprefab);
+				Destroy (_instance);
 				haspotion = false;
 				//need limiter to not exceed maxHP
 			}
 			else if(Potion.STATUS == "PSN")
 			{
 				Hero.STATUS = "NA";
-				Destroy (POTIONprefab);
+				Destroy (_instance);
 				haspotion = false;
 			}
 			else if(Potion.STATUS == "PSNRES")
@@ -290,10 +290,16 @@ public class CraftingScript : MonoBehaviour {
 			else if(Potion.STATUS == "ATK")
 			{
 				Hero.PWR += Potion.PWR;
-				Destroy (POTIONprefab);
+				Destroy (_instance);
 				haspotion = false;
 				//need variable to reset PWR to normal after next attack
 			}
+			else if(Potion.STATUS == "NA")
+			{
+				Destroy (_instance);
+				Debug.Log("Nothing happened);
+			}
+			
 		}
 		
 		
