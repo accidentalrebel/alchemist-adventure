@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Battle_npc : MonoBehaviour  {
 	
@@ -9,6 +10,16 @@ public class Battle_npc : MonoBehaviour  {
 	public Timerbar timerbar;
 	public Battle_npc[] heroes;
 	public Battle_npc enemy;
+	
+	public GameObject damagecounterenemy;
+	public TMP_Text damagetoenemy;
+	public TMP_Text damagetohero1;
+	public TMP_Text damagetohero2;
+	public TMP_Text damagetohero3;
+	
+	public float damagetime = 0;
+	public bool hasAttacked = false;
+	
   
 	
 	public void Setup(StatClass stats) {
@@ -36,10 +47,11 @@ public class Battle_npc : MonoBehaviour  {
 			
 			//Hero Attacks
 			if ( this.gameObject.tag == "Player") {
+				hasAttacked = true;	
 				OnAttackHero();
+				
 			}
-			
-			
+	
 			//Enemy Attacks
 			if ( this.gameObject.tag == "Enemy") {
 				OnAttackEnemy();
@@ -48,22 +60,36 @@ public class Battle_npc : MonoBehaviour  {
 			stats.TIMER = stats.SPD;
 		}
 		
+		//Damage Counter Enemy
+		/*if (hasAttacked = true) {
+			damagecounterenemy.gameObject.SetActive(true);
+			damagetime = 2;
+			damagetime -= Time.deltaTime;
+			if (damagetime <= 0 ) {	
+				damagecounterenemy.gameObject.SetActive(false);
+			}
+			hasAttacked = false;
+		}
+		*/
+		
+		
 		//Timer Bar
 		timerbar.SetSize((stats.TIMER/stats.SPD));
 		
 		//Damage and Death
 		if (stats.HP <= 0 ) {
 			Death();
-		}
-
-		
-		
+		}	
 	}
 	
 	public void OnAttackHero () {
 		
 		enemy.stats.HP -= this.stats.PWR;
 		Debug.Log("hero " + stats.NAME + " attacked the enemy");
+		damagetoenemy.text = this.stats.PWR.ToString();
+		damagecounterenemy.gameObject.SetActive(true);
+		for (float damagetime = 2; damagetime <= 0; damagetime -= Time.deltaTime ) {
+		damagecounterenemy.gameObject.SetActive(false);}
 		
 	}
 	
@@ -80,6 +106,7 @@ public class Battle_npc : MonoBehaviour  {
 		Debug.Log ( stats.NAME + "is dead");
 		
 	}
+	
 	
 	
 
