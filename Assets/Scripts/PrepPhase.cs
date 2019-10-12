@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using System.Linq;
 using TMPro;
 
 public class PrepPhase : MonoBehaviour {
@@ -16,7 +17,9 @@ public class PrepPhase : MonoBehaviour {
     // Use this for initialization
     void Start () {
         displayIngredients = new List<string>();
-        
+        displayIngredients = Enumerable.ToList(Enumerable.Distinct(displayIngredients)); 
+
+
         Ingredients[] ingredients = new Ingredients[3];
         ingredients[0] = new Ingredients();
         ingredients[0].ingredientName = "Water";
@@ -35,33 +38,32 @@ public class PrepPhase : MonoBehaviour {
 
 
 
-        
 
-        for (int count = 0; count < 3; count++)
+        int count = 0;
+        while (count < 3)
         {
-            
-               IngredientName[count].text = ingredients[Random.Range(0, 3)].ingredientName;
-               Debug.Log("test" + IngredientName[count].text);
-               displayIngredients.Add(IngredientName[count].text);
-            if(!displayIngredients.Contains(IngredientName[count].text))
+            string random = ingredients[Random.Range(0, ingredients.Length)].ingredientName;           
+            if (!displayIngredients.Contains(random))
             {
-        
+                IngredientName[count].text = random;
+                displayIngredients.Add(IngredientName[count].text);
+                Debug.Log("Item Added " + IngredientName[count].text);
+                count++;
             }
-         
         }
 
 
-        /*
-        for (int count = 0; count <=2; count++)
+      
+        for (int priceIndex = 0; priceIndex < ingredients.Length; priceIndex++)
         {
-            IngredientPrice[count].text = ingredients[count].ingredientPrice.ToString();
+            IngredientPrice[priceIndex].text = ingredients[priceIndex].ingredientPrice.ToString();
         }
-        */
+  
 
 
 
   
-
+        
 
 
     }
