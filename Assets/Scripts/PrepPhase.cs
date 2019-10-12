@@ -6,16 +6,25 @@ using System.Linq;
 using TMPro;
 
 public class PrepPhase : MonoBehaviour {
+
+    public Player player;
     public Ingredients dataIngredients;
     public TMP_Text[] IngredientName;
     public TMP_Text[] IngredientPrice;
+    public TMP_Text goldValue;
 
+
+    public int goldTotal;
     public string[] ingredientList = { "Water", "Oil", "Wine" };
     List<string> displayIngredients;
 
 
     // Use this for initialization
     void Start () {
+        goldTotal = player.gold;
+        goldValue.text = goldTotal.ToString();
+       
+
         displayIngredients = new List<string>();
         displayIngredients = Enumerable.ToList(Enumerable.Distinct(displayIngredients)); 
 

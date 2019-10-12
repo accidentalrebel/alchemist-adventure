@@ -17,7 +17,7 @@ public class Player : MonoBehaviour {
         PlayerPrefs.SetInt("gold", 100);
 
         fame = PlayerPrefs.GetInt("fame");
-
+        gold = PlayerPrefs.GetInt("gold");
     }
 
     
