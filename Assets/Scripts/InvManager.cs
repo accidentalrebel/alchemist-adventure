@@ -5,7 +5,7 @@ using UnityEngine;
 public class InvManager 
  {
 	public string[] items = {"Water", "Oil", "Wine", "Herb", "Mushroom","Venom"};
-	public int[] count = new int[6];
+	public int[] count = {5,5,5,5,5,5};
 	
 	
 	public void buyItem(string name)
@@ -30,70 +30,4 @@ public class InvManager
 		}
 	}
 	
-	/*public static int Water
-	{
-		get
-		{
-			return Water;
-		}
-		set
-		{
-			Water = value;
-		}
-	}
-		public static int Oil
-	{
-		get
-		{
-			return Oil;
-		}
-		set
-		{
-			Oil = value;
-		}
-	}
-		public static int Wine
-	{
-		get
-		{
-			return Wine;
-		}
-		set
-		{
-			Wine = value;
-		}
-	}
-		public static int Herb
-	{
-		get
-		{
-			return Herb;
-		}
-		set
-		{
-			Herb = value;
-		}
-	}
-		public static int Mushroom
-	{
-		get
-		{
-			return Mushroom;
-		}
-		set
-		{
-			Mushroom = value;
-		}
-	}
-		public static int	 Venom
-	{
-		get
-		{
-			return Venom;
-		}
-		set
-		{
-			Venom = value;
-		}
-	}*/
 }
