@@ -9,6 +9,7 @@ public class CraftingScript : MonoBehaviour {
 	public 	List<StatClass> items;
 	public float cauldronCD;
 	//playerinventory need to be changed based on quest selection
+	InvManager ingredients = new InvManager();
 	string[] PlayerInv = {"Water", "Oil", "Wine", "Herb", "Mushroom","Venom"};
 	int[] invcount = {5,5,5,5,5,5} ;
 	StatClass PlayerPTN;
@@ -28,6 +29,11 @@ public class CraftingScript : MonoBehaviour {
 	public Image[] itemImage = new Image[3];
 	string[] Item = new string[3];
 	public GameObject[] Box = new GameObject[3];
+	//for shelf
+	public TMP_Text[] itemcount;
+	private GameObject childObj;
+	public bool activeSelf;
+	
 	
 	// Use this for initialization
 	void Start () {
@@ -49,17 +55,18 @@ public class CraftingScript : MonoBehaviour {
 		items.Add(new StatClass("WINVen", 0, 0, "PSNRES", 15, 0));
 		items.Add(new StatClass("OILVen", 0, 0, "PSN", 15, 0));
 		
-		//ingredient class needed
-		/*for (int x = 0; x < 6;x ++);
+		//set invcount from prepphase
+		for (int x = 0; x < 6; x++)
 		{
-			for (int y = 0; y < ingredient.Count; y++)
+			for (int y = 0; y< 6;y++)
 			{
-				if(ingredient[y].Name? == PlayerInv[x])
-				{				
-					invcount[x] = ingredient[y].amount?;
-				}
+			if(ingredients.items[y] == PlayerInv[x])
+			{
+				invcount[x]=ingredients.count[y];
 			}
-		}*/
+			}
+		}
+
 			
 	}
 	
@@ -74,6 +81,15 @@ public class CraftingScript : MonoBehaviour {
 			//need visual indicator of timer
 		
 		cauldronCD -= Time.deltaTime;
+		
+				
+		//shelf? need to get parent name
+		for(int x = 0; x < 6; x++)
+		{
+			itemcount[x].text = invcount[x].ToString();
+		}
+		
+		
 		
 	}
 	//which potion is it
@@ -375,4 +391,38 @@ public class CraftingScript : MonoBehaviour {
 				Debug.Log("sumthing wrong?" + haspotion + cauldronCD + cancraft);
 			}
 		}
+		
+		//add items from drops
+		public void additem(string name)
+		{
+			for (int y = 0; y< 6;y++)
+			{
+			if(name == PlayerInv[y])
+			{
+				invcount[y]++;
+			}
+			}
+		}
+
+		
+		//shelf stuff
+		public void itemSelect()
+		{
+			
+			string name = EventSystem.current.currentSelectedGameObject.name;
+			/* for later
+			childObj = this.transform.GetChild(0).gameObject;
+			
+			if(childObj.activeSelf == false)
+			{
+				childObj.transform.gameObject.SetActive(true);
+			}
+			else
+			{
+				childObj.transform.gameObject.SetActive(false);
+			}*/
+
+		}
+		
+		
 }
