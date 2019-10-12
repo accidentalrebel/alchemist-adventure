@@ -15,6 +15,7 @@ public class CraftingScript : MonoBehaviour {
 	StatClass PlayerPTN;
 	bool haspotion = false;
 	bool cancraft = true;
+
 	
 	//For Potion instance
 	private GameObject _instance;
@@ -279,6 +280,12 @@ public class CraftingScript : MonoBehaviour {
 		{
 			Destroy(_instance);
 			haspotion = false;
+			string name = EventSystem.current.currentSelectedGameObject.name;
+			StatClass TheHero = getitembyID(name);
+			Debug.Log(TheHero.NAME);
+			UsePotion(TheHero, PlayerPTN);
+
+			
 		}
 		
 		
@@ -410,6 +417,7 @@ public class CraftingScript : MonoBehaviour {
 		{
 			
 			string name = EventSystem.current.currentSelectedGameObject.name;
+			
 			/* for later
 			childObj = this.transform.GetChild(0).gameObject;
 			

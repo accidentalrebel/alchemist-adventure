@@ -2461,12 +2461,12 @@ Prefab:
     - target: {fileID: 114009686053708684, guid: 84429796a523640489cf70665de89d7b,
         type: 2}
       propertyPath: m_havePropertiesChanged
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114009686053708684, guid: 84429796a523640489cf70665de89d7b,
         type: 2}
       propertyPath: m_isInputParsingRequired
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114009686053708684, guid: 84429796a523640489cf70665de89d7b,
         type: 2}
@@ -2510,7 +2510,7 @@ Prefab:
       objectReference: {fileID: 618387864}
     - target: {fileID: 1220145663365276, guid: 84429796a523640489cf70665de89d7b, type: 2}
       propertyPath: m_Name
-      value: Hero_Mage
+      value: Mage
       objectReference: {fileID: 0}
     - target: {fileID: 114715263533192202, guid: 84429796a523640489cf70665de89d7b,
         type: 2}
@@ -2521,6 +2521,16 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 114267372164262272, guid: 84429796a523640489cf70665de89d7b,
+        type: 2}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114267372164262272, guid: 84429796a523640489cf70665de89d7b,
+        type: 2}
+      propertyPath: m_isInputParsingRequired
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84429796a523640489cf70665de89d7b, type: 2}
@@ -4415,27 +4425,27 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1220145663365276, guid: 84429796a523640489cf70665de89d7b, type: 2}
       propertyPath: m_Name
-      value: Hero_Knight
+      value: Knight
       objectReference: {fileID: 0}
     - target: {fileID: 114009686053708684, guid: 84429796a523640489cf70665de89d7b,
         type: 2}
       propertyPath: m_havePropertiesChanged
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114009686053708684, guid: 84429796a523640489cf70665de89d7b,
         type: 2}
       propertyPath: m_isInputParsingRequired
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114267372164262272, guid: 84429796a523640489cf70665de89d7b,
         type: 2}
       propertyPath: m_havePropertiesChanged
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114267372164262272, guid: 84429796a523640489cf70665de89d7b,
         type: 2}
       propertyPath: m_isInputParsingRequired
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114009686053708684, guid: 84429796a523640489cf70665de89d7b,
         type: 2}
@@ -6449,27 +6459,27 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1220145663365276, guid: 84429796a523640489cf70665de89d7b, type: 2}
       propertyPath: m_Name
-      value: Hero_Archer
+      value: Archer
       objectReference: {fileID: 0}
     - target: {fileID: 114267372164262272, guid: 84429796a523640489cf70665de89d7b,
         type: 2}
       propertyPath: m_havePropertiesChanged
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114267372164262272, guid: 84429796a523640489cf70665de89d7b,
         type: 2}
       propertyPath: m_isInputParsingRequired
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114009686053708684, guid: 84429796a523640489cf70665de89d7b,
         type: 2}
       propertyPath: m_havePropertiesChanged
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114009686053708684, guid: 84429796a523640489cf70665de89d7b,
         type: 2}
       propertyPath: m_isInputParsingRequired
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114009686053708684, guid: 84429796a523640489cf70665de89d7b,
         type: 2}
