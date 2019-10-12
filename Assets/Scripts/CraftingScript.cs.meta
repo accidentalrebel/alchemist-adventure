@@ -3,7 +3,13 @@ guid: c0ea4424b0cb81a47814317ce57850f1
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - POTIONprefab: {fileID: 1377960685995322, guid: fe1a17ee0f1f1e64bad3acfd135b6e81,
+      type: 2}
+  - cauldron: {instanceID: 0}
+  - HP: {fileID: 21300000, guid: af448f9693bd85143ae467561cf0fc4e, type: 3}
+  - ATK: {fileID: 21300000, guid: e1ca0832e530e4049a49e9e9c0f60a2c, type: 3}
+  - CURE: {fileID: 21300000, guid: 0f3c293f1ad41df42bb3a868165051f5, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
