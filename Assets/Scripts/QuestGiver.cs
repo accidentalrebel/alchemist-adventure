@@ -9,7 +9,9 @@ public class QuestGiver : MonoBehaviour {
 
     public Quest quest;
 
-    public QuestManager questManager;
+    public Player player;
+
+    //public QuestManager questManager;
 
     public GameObject questWindow;
 
@@ -17,7 +19,7 @@ public class QuestGiver : MonoBehaviour {
 
     public void Start()
     {
-       fameValue = PlayerPrefs.GetInt("fame");
+        fameValue = player.fame;
         Debug.Log("Fame Value: " + fameValue);
     }
 
@@ -26,7 +28,7 @@ public class QuestGiver : MonoBehaviour {
     public TMP_Text fameReward;
     public TMP_Text goldReward;
 
-    public int enterRequirement;
+    public int fameRequirement;
 
     public void OpenQuestWindow()
     {
@@ -43,9 +45,9 @@ public class QuestGiver : MonoBehaviour {
     public void QuestAccepted()
     {
         
-        enterRequirement = quest.enterRequirement;
-        Debug.Log("Enter Requirement: " + enterRequirement);
-        if (fameValue >= enterRequirement)
+        fameRequirement = quest.fameRequirement;
+        Debug.Log("Enter Requirement: " + fameRequirement);
+        if (fameValue >= fameRequirement)
             
         {
             questWindow.SetActive(false);
@@ -54,7 +56,7 @@ public class QuestGiver : MonoBehaviour {
             Debug.Log("Prepartion Phase Loaded");
         }
 
-        else if (fameValue < enterRequirement)
+        else if (fameValue < fameRequirement)
         {
             Debug.Log("Not enough Fame");
         }
