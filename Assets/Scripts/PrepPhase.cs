@@ -26,7 +26,7 @@ public class PrepPhase : MonoBehaviour {
        
 
         displayIngredients = new List<string>();
-        displayIngredients = Enumerable.ToList(Enumerable.Distinct(displayIngredients)); 
+    
 
 
         Ingredients[] ingredients = new Ingredients[3];
@@ -45,35 +45,22 @@ public class PrepPhase : MonoBehaviour {
         ingredients[2].ingredientPrice = 7;
         ingredients[2].ingredientQuantity = 1;
 
-
-
-
+        
         int count = 0;
         while (count < 3)
         {
-            string random = ingredients[Random.Range(0, ingredients.Length)].ingredientName;           
+            string random = ingredients[Random.Range(0, ingredients.Length)].ingredientName;
+        
             if (!displayIngredients.Contains(random))
             {
+              
                 IngredientName[count].text = random;
                 displayIngredients.Add(IngredientName[count].text);
                 Debug.Log("Item Added " + IngredientName[count].text);
                 count++;
             }
         }
-
-
-      
-        for (int priceIndex = 0; priceIndex < ingredients.Length; priceIndex++)
-        {
-            IngredientPrice[priceIndex].text = ingredients[priceIndex].ingredientPrice.ToString();
-        }
-  
-
-
-
-  
         
-
 
     }
 
