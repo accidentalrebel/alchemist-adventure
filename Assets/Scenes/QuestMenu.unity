@@ -578,6 +578,48 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 688563058}
   m_CullTransparentMesh: 0
+--- !u!1 &720169086
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 720169088}
+  - component: {fileID: 720169087}
+  m_Layer: 0
+  m_Name: Player
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &720169087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 720169086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21a12fa967efdf7459c1af1dcf7ebb6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gold: 0
+  fame: 0
+--- !u!4 &720169088
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 720169086}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 20.066582, y: 121.967445, z: -2.195559}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &807560957
 GameObject:
   m_ObjectHideFlags: 0
@@ -718,7 +760,7 @@ MonoBehaviour:
   - ID: 0
     questName: Tutorial
     questDesc: Get a feel for the game
-    enterRequirement: 0
+    fameRequirement: 0
     backToMenu: 0
     progress: 1
     questObjective: 
@@ -743,7 +785,7 @@ MonoBehaviour:
     ID: 0
     questName: Tutorial
     questDesc: We teach the basics
-    enterRequirement: 0
+    fameRequirement: 0
     backToMenu: 0
     progress: 1
     questObjective: 
@@ -752,14 +794,14 @@ MonoBehaviour:
     fameReward: 2
     goldReward: 1
     itemReward: 
-  questManager: {fileID: 0}
+  player: {fileID: 720169087}
   questWindow: {fileID: 1675037185}
   fameValue: 0
   questTitle: {fileID: 1657078508}
   questDescription: {fileID: 1288972749}
   fameReward: {fileID: 549214950}
   goldReward: {fileID: 688563060}
-  enterRequirement: 0
+  fameRequirement: 0
 --- !u!1 &963854709
 GameObject:
   m_ObjectHideFlags: 0
@@ -837,6 +879,17 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2090971225}
+        m_MethodName: QuestAccepted
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 807560963}
         m_MethodName: QuestAccepted
         m_Mode: 1
         m_Arguments:
@@ -1040,67 +1093,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1288972747}
   m_CullTransparentMesh: 0
---- !u!1 &1355323530
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1355323532}
-  - component: {fileID: 1355323531}
-  m_Layer: 0
-  m_Name: QuestGiver
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1355323531
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1355323530}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3df3886b0b59d214689c8c858f2b2634, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  quest:
-    ID: 0
-    questName: Tutorial
-    questDesc: Get to know the game
-    enterRequirement: 0
-    backToMenu: 0
-    progress: 1
-    questObjective: 
-    questObjectiveCount: 0
-    questRequirement: 0
-    fameReward: 100
-    goldReward: 100
-    itemReward: 
-  questManager: {fileID: 0}
-  questWindow: {fileID: 1675037185}
-  fameValue: 0
-  questTitle: {fileID: 1657078508}
-  questDescription: {fileID: 1288972749}
-  fameReward: {fileID: 549214950}
-  goldReward: {fileID: 688563060}
-  enterRequirement: 0
---- !u!4 &1355323532
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1355323530}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18, y: 16, z: 3.0897636}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1377870107
 GameObject:
   m_ObjectHideFlags: 0
@@ -1486,7 +1478,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1355323531}
+      - m_Target: {fileID: 0}
         m_MethodName: QuestDeclined
         m_Mode: 1
         m_Arguments:
@@ -2241,7 +2233,7 @@ MonoBehaviour:
   - ID: 0
     questName: Tutorial
     questDesc: Get a feel for the game
-    enterRequirement: 2
+    fameRequirement: 0
     backToMenu: 0
     progress: 1
     questObjective: 
@@ -2352,7 +2344,7 @@ MonoBehaviour:
     ID: 0
     questName: 1st dungeon
     questDesc: Defeat the boss
-    enterRequirement: 0
+    fameRequirement: 0
     backToMenu: 0
     progress: 1
     questObjective: 
@@ -2361,14 +2353,14 @@ MonoBehaviour:
     fameReward: 2
     goldReward: 1
     itemReward: 
-  questManager: {fileID: 2090971221}
+  player: {fileID: 720169087}
   questWindow: {fileID: 1675037185}
   fameValue: 0
   questTitle: {fileID: 1657078508}
   questDescription: {fileID: 1288972749}
   fameReward: {fileID: 549214950}
   goldReward: {fileID: 688563060}
-  enterRequirement: 0
+  fameRequirement: 0
 --- !u!1 &2118589875
 GameObject:
   m_ObjectHideFlags: 0
