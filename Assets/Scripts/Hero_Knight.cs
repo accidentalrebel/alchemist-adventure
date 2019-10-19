@@ -9,6 +9,7 @@ public class Hero_Knight : Battle_npc {
 
 	void Start () {
 		
+		//Name, HP, PWR, STATUS, SPD, PRICE, MAXHP
 		Setup(new StatClass ("Knight", 6, 5, "NA", 15f, 0, 6));
 		
 		Debug.Log("knight ready");
