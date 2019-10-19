@@ -271,6 +271,16 @@ Prefab:
       propertyPath: timerbar
       value: 
       objectReference: {fileID: 1084524942}
+    - target: {fileID: 114202486951287530, guid: f4740a51e9313e44e9df9c424cc808b2,
+        type: 2}
+      propertyPath: damagecounterenemy
+      value: 
+      objectReference: {fileID: 1749762914}
+    - target: {fileID: 114202486951287530, guid: f4740a51e9313e44e9df9c424cc808b2,
+        type: 2}
+      propertyPath: damagetoenemy
+      value: 
+      objectReference: {fileID: 775627736}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4740a51e9313e44e9df9c424cc808b2, type: 2}
   m_IsPrefabAsset: 0
@@ -1128,7 +1138,7 @@ GameObject:
   - component: {fileID: 775627737}
   - component: {fileID: 775627736}
   m_Layer: 0
-  m_Name: Enemy Damage
+  m_Name: Damage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1171,7 +1181,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: 20
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1247,11 +1257,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -1283,7 +1293,7 @@ GameObject:
   - component: {fileID: 826652178}
   - component: {fileID: 826652177}
   m_Layer: 0
-  m_Name: Image
+  m_Name: VFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1597,6 +1607,21 @@ Prefab:
       propertyPath: timerbar
       value: 
       objectReference: {fileID: 1728257088}
+    - target: {fileID: 114683344263300880, guid: f990f24416287904f8696be214705073,
+        type: 2}
+      propertyPath: damagecounterenemy
+      value: 
+      objectReference: {fileID: 1749762914}
+    - target: {fileID: 114683344263300880, guid: f990f24416287904f8696be214705073,
+        type: 2}
+      propertyPath: damagebyenemy
+      value: 
+      objectReference: {fileID: 775627736}
+    - target: {fileID: 114683344263300880, guid: f990f24416287904f8696be214705073,
+        type: 2}
+      propertyPath: damagetoenemy
+      value: 
+      objectReference: {fileID: 775627736}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f990f24416287904f8696be214705073, type: 2}
   m_IsPrefabAsset: 0
@@ -1844,6 +1869,16 @@ Prefab:
       propertyPath: timerbar
       value: 
       objectReference: {fileID: 1405637761}
+    - target: {fileID: 114455857342554970, guid: f1128d1a5db6bb6438d2762042b71252,
+        type: 2}
+      propertyPath: damagecounterenemy
+      value: 
+      objectReference: {fileID: 1749762914}
+    - target: {fileID: 114455857342554970, guid: f1128d1a5db6bb6438d2762042b71252,
+        type: 2}
+      propertyPath: damagetoenemy
+      value: 
+      objectReference: {fileID: 775627736}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f1128d1a5db6bb6438d2762042b71252, type: 2}
   m_IsPrefabAsset: 0
@@ -1930,7 +1965,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1749762915
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2301,6 +2336,13 @@ MonoBehaviour:
   - {fileID: 1685450833}
   - {fileID: 659971745}
   enemy: {fileID: 851190295}
+  damagecounterenemy: {fileID: 1749762914}
+  damagetoenemy: {fileID: 0}
+  damagetohero1: {fileID: 0}
+  damagetohero2: {fileID: 0}
+  damagetohero3: {fileID: 0}
+  damagetime: 2
+  hasAttacked: 0
 --- !u!4 &1905015540
 Transform:
   m_ObjectHideFlags: 0
