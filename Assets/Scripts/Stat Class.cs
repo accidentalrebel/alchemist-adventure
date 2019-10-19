@@ -12,6 +12,10 @@ public class StatClass
 	public int PRICE;
 	public int MaxHP;  //Added Max HP for HP Bars -Pam
 	public float TIMER; //Added Timer -Pam
+	public bool isDead; // Added Death mode -Pam
+	public bool hasAttacked; //Added Attack status -Pam
+	public int BNSPWR; //Added a Bonus PWR variable for buffs -Pam
+
 		
 	
 
