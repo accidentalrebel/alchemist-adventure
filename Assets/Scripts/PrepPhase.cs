@@ -50,17 +50,17 @@ public class PrepPhase : MonoBehaviour {
 
         ingredients[3] = new Ingredients();
         ingredients[3].ingredientName = "Herb";
-        ingredients[3].ingredientPrice = 7;
+        ingredients[3].ingredientPrice = 5;
         ingredients[3].ingredientQuantity = 1;
 
         ingredients[4] = new Ingredients();
         ingredients[4].ingredientName = "Mushroom";
-        ingredients[4].ingredientPrice = 7;
+        ingredients[4].ingredientPrice = 4;
         ingredients[4].ingredientQuantity = 1;
 
         ingredients[5] = new Ingredients();
         ingredients[5].ingredientName = "Venom";
-        ingredients[5].ingredientPrice = 7;
+        ingredients[5].ingredientPrice = 8;
         ingredients[5].ingredientQuantity = 1;
 
 
@@ -68,14 +68,18 @@ public class PrepPhase : MonoBehaviour {
         int count = 0;
         while (count < 3)
         {
-            string random = ingredients[Random.Range(0, ingredients.Length)].ingredientName;
+            Ingredients ingredient = ingredients[Random.Range(0, ingredients.Length)];
+            string random = ingredient.ingredientName;
+            
             if (!displayIngredients.Contains(random))
             {
                 IngredientName[count].text = random;
+                IngredientPrice[count].text = ingredient.ingredientPrice.ToString();
                 displayIngredients.Add(IngredientName[count].text);
                 Debug.Log("Item Added " + IngredientName[count].text);
                 count++;
             }
+           
 
         }
 
