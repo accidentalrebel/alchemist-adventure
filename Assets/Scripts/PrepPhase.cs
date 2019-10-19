@@ -83,10 +83,7 @@ public class PrepPhase : MonoBehaviour {
 
         }
 
-        /* for (int priceIndex = 0; priceIndex < ingredients.Length; priceIndex++)
-    {
-        IngredientPrice[priceIndex].text = ingredients[priceIndex].ingredientPrice.ToString();
-    }*/
+
 
     }
 
