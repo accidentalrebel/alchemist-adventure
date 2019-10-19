@@ -34,7 +34,6 @@ public class CraftingScript : MonoBehaviour {
 	private GameObject childObj;
 	public bool activeSelf;
 	
-	
 	// Use this for initialization
 	void Start () {
         items = new List<StatClass>();
@@ -42,9 +41,9 @@ public class CraftingScript : MonoBehaviour {
         items.Add(new StatClass("Water", 0, 0, "BASE", 0, 2));
         items.Add(new StatClass("Oil", 0, 1, "BASE", 0, 0));
         items.Add(new StatClass("Wine", 0, 2, "BASE", 0, 7));
-        items.Add(new StatClass("Herb", 2, 0, "HP", 10, 5));
-        items.Add(new StatClass("Venom", 0, 0, "PSN", 15, 7));
-        items.Add(new StatClass("Mushroom", 0, 1, "ATK", 15, 0));
+        items.Add(new StatClass("Herb", 2, 0, "FIRST", 10, 5));
+        items.Add(new StatClass("Venom", 0, 0, "SECOND", 15, 7));
+        items.Add(new StatClass("Mushroom", 0, 1, "FIRST", 15, 0));
 		items.Add(new StatClass("WTRhrb", 2, 0, "POTION", 10, 0));
 		items.Add(new StatClass("OILhrb", 2, 0, "POTION", 10, 0));
 		items.Add(new StatClass("WINhrb", 4, 0, "POTION", 10, 0));
@@ -113,7 +112,21 @@ public class CraftingScript : MonoBehaviour {
 		StatClass potion = null;
       if(BASE == "Water")
 		{
-			if(frsting == "Herb")
+			if(scnding == "Venom" && frsting != null)
+			{
+			potion = getitembyID("WTRVen");
+			POTIONprefab.GetComponent<Image>().sprite = CURE;
+			invcount[5] -=1;
+			for(int x = 0; x < 6;x++)
+				{
+
+					if(frsting == PlayerInv[x])
+					{
+						invcount[x] -=1;
+					}
+				}
+			}
+			else if(frsting == "Herb")
 			{
 			potion = getitembyID("WTRhrb");
 			POTIONprefab.GetComponent<Image>().sprite = HP;
@@ -125,25 +138,26 @@ public class CraftingScript : MonoBehaviour {
 			POTIONprefab.GetComponent<Image>().sprite = ATK;
 			invcount[4] -=1;
 			}
-			else if(frsting == "Venom" && scnding != "")
+			 
+		invcount[0] -=1;
+		}
+		else if(BASE == "Wine")
+		{
+			if(scnding == "Venom" && frsting != null)
 			{
-			potion = getitembyID("WTRVen");
-			POTIONprefab.GetComponent<Image>().sprite = CURE;
-			invcount[5] -=1;
-			for(int x = 0; x < 6;x++)
+				potion = getitembyID("WINVen");
+				POTIONprefab.GetComponent<Image>().sprite = CURE;
+				invcount[5] -=1;
+				for(int x = 0; x < 6;x++)
 				{
 
-					if(scnding == PlayerInv[x])
+					if(frsting == PlayerInv[x])
 					{
 						invcount[x] -=1;
 					}
 				}
 			}
-		invcount[0] -=1;
-		}
-		else if(BASE == "Wine")
-		{
-			if(frsting == "Herb")
+			else if(frsting == "Herb")
 			{
 				potion = getitembyID("WINhrb");
 				POTIONprefab.GetComponent<Image>().sprite = HP;
@@ -155,20 +169,7 @@ public class CraftingScript : MonoBehaviour {
 				POTIONprefab.GetComponent<Image>().sprite = ATK;
 				invcount[4] -=1;
 			}
-			else if(frsting == "Venom")
-			{
-				potion = getitembyID("WINVen");
-				POTIONprefab.GetComponent<Image>().sprite = CURE;
-				invcount[5] -=1;
-				for(int x = 0; x < 6;x++)
-				{
-
-					if(scnding == PlayerInv[x])
-					{
-						invcount[x] -=1;
-					}
-				}
-			}
+			 
 		invcount[2] -=1;  
 		}
 		else if(BASE == "Oil")
@@ -177,9 +178,33 @@ public class CraftingScript : MonoBehaviour {
 			int oilRDM;
 			oilRDM = Random.Range(0,2);
 		  
-		  
-		
-		if(frsting == "Herb")
+		 if(scnding == "Venom" && frsting != null)
+		{
+			potion = getitembyID("OILVen");
+			if(oilRDM == 0)
+			{
+			potion.STATUS = "NA";
+			}
+			else if(oilRDM == 1)
+			{
+			potion.STATUS = "PSN";
+			}
+			else if(oilRDM == 2)
+			{
+			potion.STATUS = "PSNRES";
+			}
+			POTIONprefab.GetComponent<Image>().sprite = CURE;
+			invcount[5] -=1;
+			for(int x = 0; x < 6;x++)
+			{
+
+				if(frsting == PlayerInv[x])
+				{
+					invcount[x] -=1;
+				}
+			}
+		}
+		else if(frsting == "Herb")
 		{
 			potion = getitembyID("OILhrb");
 			
@@ -216,34 +241,10 @@ public class CraftingScript : MonoBehaviour {
 			POTIONprefab.GetComponent<Image>().sprite = ATK;
 			invcount[4] -=1;
 		}
-		else if(frsting == "Venom" && scnding != "")
-		{
-			potion = getitembyID("OILVen");
-			if(oilRDM == 0)
-			{
-			potion.STATUS = "NA";
-			}
-			else if(oilRDM == 1)
-			{
-			potion.STATUS = "PSN";
-			}
-			else if(oilRDM == 2)
-			{
-			potion.STATUS = "PSNRES";
-			}
-			POTIONprefab.GetComponent<Image>().sprite = CURE;
-			invcount[5] -=1;
-			for(int x = 0; x < 6;x++)
-			{
-
-				if(scnding == PlayerInv[x])
-				{
-					invcount[x] -=1;
-				}
-			}
+		 
 			
 		
-		}
+		
 		invcount[1] -=1;
 		}
 		//need function to give hero script the potion
@@ -320,34 +321,20 @@ public class CraftingScript : MonoBehaviour {
 		
 		
 		
-		//selectin item.
-	
-		public void SelectBase()
-		{
-			for (int x = 0; x < 3; x++)
-			{
-
-			Item[x] = itemText[x].text;
-			Box[x].GetComponent<Image>().sprite = itemImage[x].sprite;
-			//Debug.Log(Item[x]);
-
-			}
-		}
 		public void OnMix()
 		{
-			for (int x = 0; x < 3; x++)
-			{
-
-			Item[x] = itemText[x].text;
-			Box[x].GetComponent<Image>().sprite = itemImage[x].sprite;
-			//Debug.Log(Item[x]);
-
-			}
+		
 			for (int y = 0; y < 3; y++)
 			{
 				for(int x = 0; x < 6; x++)
 				{
-					if(PlayerInv[x] == Item[y])
+					if(Item[0] == null || Item[1] == null)
+					{
+						cancraft = false;
+						Debug.Log("Select More Ingredients");
+						return;
+					}
+					else if(PlayerInv[x] == Item[y])
 					{
 						if(invcount[x] > 0)
 						{
@@ -365,7 +352,10 @@ public class CraftingScript : MonoBehaviour {
 			}
 			if(haspotion == false && cancraft == true && cauldronCD <= 0 )
 			{
+			Debug.Log(Item[0] + Item[1] + Item[2]);
 			Craft(Item[0],Item[1],Item[2]);
+			
+
 			
 			
 			_instance = Instantiate(POTIONprefab);
@@ -373,7 +363,18 @@ public class CraftingScript : MonoBehaviour {
 			_instance.transform.localPosition = new Vector2(1f,1f);
 			haspotion = true;
 			Debug.Log("You made a " + PlayerPTN.NAME);
-			
+				for (int x = 0 ; x < 3; x++)
+			{
+				Item[x] = null;
+				Box[x].gameObject.SetActive(false);
+				GameObject unselect = GameObject.Find("Selected");
+				
+				if(unselect != null)
+				{
+					unselect.gameObject.SetActive(false);
+				}
+				
+			}
 			//need visual indication for how much ingredients was used. (Eg, "-1" floating over used items or images of used items moving into the cauldron)
 			}
 			else if(haspotion == true)
@@ -410,18 +411,103 @@ public class CraftingScript : MonoBehaviour {
 		{
 			
 			string name = EventSystem.current.currentSelectedGameObject.name;
-			/* for later
-			childObj = this.transform.GetChild(0).gameObject;
+			Image[] images = EventSystem.current.currentSelectedGameObject.GetComponentsInChildren<Image>(true);
+			Image theimage = images[1];
 			
-			if(childObj.activeSelf == false)
+			StatClass itemselect = getitembyID(name);
+			if(itemselect.STATUS == "BASE")
 			{
-				childObj.transform.gameObject.SetActive(true);
-			}
-			else
-			{
-				childObj.transform.gameObject.SetActive(false);
-			}*/
+				if (Item[0] != null && Item[0] != itemselect.NAME)
+				{
+					GameObject unselect = GameObject.Find(Item[0]);
+					Image[] oldimages = unselect.gameObject.GetComponentsInChildren<Image>();
+					Image oldimage = oldimages[1];
+					oldimage.gameObject.SetActive(false);				
+					theimage.gameObject.SetActive(true);
+					Debug.Log(itemselect.NAME + " is seleceted");
+					Item[0] = itemselect.NAME;
+					Box[0].gameObject.SetActive(true);
+					Box[0].GetComponent<Image>().sprite = EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite;
+				}
+				else if(Item[0] == itemselect.NAME)
+				{
+					theimage.gameObject.SetActive(false);
+					Item[0] = null;
+					Box[0].gameObject.SetActive(false);
+					Box[0].GetComponent<Image>().sprite = EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite;
+				}
+				else
+				{
+					theimage.gameObject.SetActive(true);
+					Item[0] = itemselect.NAME;
+					Box[0].gameObject.SetActive(true);
+					Box[0].GetComponent<Image>().sprite = EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite;
+				}
 
+			}
+			else if(itemselect.STATUS == "FIRST")
+			{
+				if (Item[1] != null && Item[1] != itemselect.NAME)
+				{
+					GameObject unselect = GameObject.Find(Item[1]);
+					Image[] oldimages = unselect.gameObject.GetComponentsInChildren<Image>();
+					Image oldimage = oldimages[1];
+					oldimage.gameObject.SetActive(false);				
+					theimage.gameObject.SetActive(true);
+					theimage.gameObject.SetActive(true);
+					Debug.Log(itemselect.NAME + " is seleceted");
+					Item[1] = itemselect.NAME;
+					Box[1].gameObject.SetActive(true);
+					Box[1].GetComponent<Image>().sprite = EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite;
+				}
+				else if(Item[1] == itemselect.NAME)
+				{
+					theimage.gameObject.SetActive(false);					
+					Item[1] = null;
+					Box[1].gameObject.SetActive(false);
+					Box[1].GetComponent<Image>().sprite = EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite;
+				}
+				else
+				{
+					theimage.gameObject.SetActive(true);
+					Item[1] = itemselect.NAME;
+					Box[1].gameObject.SetActive(true);
+					Box[1].GetComponent<Image>().sprite = EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite;
+				}
+			}
+			else if(itemselect.STATUS == "SECOND")
+			{
+				if (Item[2] != null && Item[2] != itemselect.NAME)
+				{
+					GameObject unselect = GameObject.Find(Item[2]);
+					Image[] oldimages = unselect.gameObject.GetComponentsInChildren<Image>();
+					Image oldimage = oldimages[1];
+					oldimage.gameObject.SetActive(false);				
+					theimage.gameObject.SetActive(true);
+					theimage.gameObject.SetActive(true);
+					Debug.Log(itemselect.NAME + " is seleceted");
+					Item[2] = itemselect.NAME;
+					Box[2].gameObject.SetActive(true);
+					Box[2].GetComponent<Image>().sprite = EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite;
+				}
+				else if(Item[2] == itemselect.NAME)
+				{
+					theimage.gameObject.SetActive(false);
+					Item[2] = null;
+					Box[2].gameObject.SetActive(false);
+					Box[2].GetComponent<Image>().sprite = EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite;
+				}
+				else
+				{
+					theimage.gameObject.SetActive(true);
+					Item[2] = itemselect.NAME;
+					Box[2].gameObject.SetActive(true);
+					Box[2].GetComponent<Image>().sprite = EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite;
+				}
+			}	
+
+					
+				
 		}
 		
 		
