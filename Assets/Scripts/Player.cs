@@ -15,12 +15,11 @@ public class Player : MonoBehaviour {
 
     void Start () {
         PlayerPrefs.SetInt("fame", 0);
-        PlayerPrefs.SetInt("gold", 100);
+        PlayerPrefs.SetInt("gold", gold);
 
         fame = PlayerPrefs.GetInt("fame");
         gold = PlayerPrefs.GetInt("gold");
     }
 
-    
 	
 }

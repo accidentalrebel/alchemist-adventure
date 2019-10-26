@@ -26,11 +26,13 @@ public class InvManager: MonoBehaviour
 	public void setCount(string name, int amount)
 
 	{
-	    if(name == items[x])
-	    {
-		count[x] = amount;
-	    }
+		for (int x = 0; x < 6; x++)
+		{
+				if(name == items[x])
+				{
+				count[x] = amount;
+				}
+		}
 	}
-    }
-	
 }
+	

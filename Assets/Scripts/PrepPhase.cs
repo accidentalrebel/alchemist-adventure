@@ -30,7 +30,7 @@ public class PrepPhase : MonoBehaviour {
     public void Start()
     {
         goldTotal = player.gold;
-        goldValue.text = goldTotal.ToString();
+        goldValue.text = player.gold.ToString();
 
         displayIngredients = new List<string>();
         displayIngredients = Enumerable.ToList(Enumerable.Distinct(displayIngredients));
@@ -97,18 +97,25 @@ public class PrepPhase : MonoBehaviour {
     public void pressBuy() {
             string whichitem = EventSystem.current.currentSelectedGameObject.name;
             int detectitem = int.Parse(whichitem);
-
             invmanager.buyItems(IngredientName[detectitem].text);
+			for (int x = 0; x < 6; x++)
+			{
+
+            if (IngredientName[detectitem].text == ingredients[x].ingredientName)
+            {
+			player.gold -= ingredients[x].ingredientPrice;
+			goldValue.text = player.gold.ToString();
+			}
+			}
             Player.invmanager = invmanager;
+			
             
         }
     
   
 
-    
-
   public void loadBattle()
     {
-        SceneManager.LoadScene("BattleSystem");
+        SceneManager.LoadScene("BattleSystem-Logic");
     }
 }

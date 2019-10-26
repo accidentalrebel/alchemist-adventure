@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/PrepPhase.unity
     guid: d9558e44c39d75a40bff09c6168c5d4e
   - enabled: 1
-    path: Assets/Scenes/BattleSystem.unity
+    path: Assets/Scenes/BattleSystem-Logic.unity
     guid: d1c894c5b01277d41b03cb80a4f0ea1b
+  - enabled: 1
+    path: Assets/Scenes/BattleSystem.unity
+    guid: 66f0a65a50fb442289b0f83d64e91ea8
   m_configObjects: {}
