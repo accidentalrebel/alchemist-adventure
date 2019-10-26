@@ -6,12 +6,13 @@ using TMPro;
 using UnityEngine.EventSystems;
 
 public class CraftingScript : MonoBehaviour {
-	public 	List<StatClass> items;
+	public List<StatClass> items;
 	public float cauldronCD;
 	//playerinventory need to be changed based on quest selection
-	InvManager ingredients = new InvManager();
+	//InvManager ingredients = new InvManager();
+	public Player player;
 	string[] PlayerInv = {"Water", "Oil", "Wine", "Herb", "Mushroom","Venom"};
-	int[] invcount = {5,5,5,5,5,5} ;
+	int[] invcount = new int[6];
 	StatClass PlayerPTN;
 	bool haspotion = false;
 	bool cancraft = true;
@@ -34,34 +35,38 @@ public class CraftingScript : MonoBehaviour {
 	private GameObject childObj;
 	public bool activeSelf;
 	
+	//gethero
+	public Battle_npc[] Heroes = new Battle_npc[3];
+
+	
 	// Use this for initialization
-	void Start () {
+	void Start () {	
         items = new List<StatClass>();
 
         items.Add(new StatClass("Water", 0, 0, "BASE", 0, 2));
-        items.Add(new StatClass("Oil", 0, 1, "BASE", 0, 0));
-        items.Add(new StatClass("Wine", 0, 2, "BASE", 0, 7));
-        items.Add(new StatClass("Herb", 2, 0, "FIRST", 10, 5));
-        items.Add(new StatClass("Venom", 0, 0, "SECOND", 15, 7));
-        items.Add(new StatClass("Mushroom", 0, 1, "FIRST", 15, 0));
-		items.Add(new StatClass("WTRhrb", 2, 0, "POTION", 10, 0));
-		items.Add(new StatClass("OILhrb", 2, 0, "POTION", 10, 0));
-		items.Add(new StatClass("WINhrb", 4, 0, "POTION", 10, 0));
-		items.Add(new StatClass("WTRpow", 0, 1, "ATK", 15, 0));
-		items.Add(new StatClass("OILpow", 0, 2, "ATK", 15, 0));
-		items.Add(new StatClass("WINpow", 0, 3, "ATK", 15, 0));
-		items.Add(new StatClass("WTRVen", 0, 0, "PSN", 15, 0));
-		items.Add(new StatClass("WINVen", 0, 0, "PSNRES", 15, 0));
-		items.Add(new StatClass("OILVen", 0, 0, "PSN", 15, 0));
+        items.Add(new StatClass("Oil", 0, 0, "BASE", 0, 7));
+        items.Add(new StatClass("Wine", 0, 0, "BASE", 0, 5));
+        items.Add(new StatClass("Herb", 2, 0, "FIRST", 0, 5));
+        items.Add(new StatClass("Venom", 0, 0, "SECOND", 0, 4));
+        items.Add(new StatClass("Mushroom", 0, 1, "FIRST", 0, 8));
+		items.Add(new StatClass("WTRhrb", 2, 0, "POTION", 3, 0));
+		items.Add(new StatClass("OILhrb", 2, 0, "POTION", 4, 0));
+		items.Add(new StatClass("WINhrb", 4, 0, "POTION", 5, 0));
+		items.Add(new StatClass("WTRpow", 0, 2, "ATK", 3, 0));
+		items.Add(new StatClass("OILpow", 0, 2, "ATK", 4, 0));
+		items.Add(new StatClass("WINpow", 0, 3, "ATK", 5, 0));
+		items.Add(new StatClass("WTRVen", 0, 0, "PSN", 3, 0));
+		items.Add(new StatClass("WINVen", 0, 0, "PSN", 4, 0));
+		items.Add(new StatClass("OILVen", 0, 0, "PSN", 5, 0));
 		
 		//set invcount from prepphase
 		for (int x = 0; x < 6; x++)
 		{
 			for (int y = 0; y< 6;y++)
 			{
-			if(ingredients.items[y] == PlayerInv[x])
+			if(Player.invmanager.items[y] == PlayerInv[x])
 			{
-				invcount[x]=ingredients.count[y];
+				invcount[x]= Player.invmanager.count[y];
 			}
 			}
 		}
@@ -143,19 +148,22 @@ public class CraftingScript : MonoBehaviour {
 		}
 		else if(BASE == "Wine")
 		{
-			if(scnding == "Venom" && frsting != null)
+			if(scnding == "Venom" && frsting == "Herb")
 			{
 				potion = getitembyID("WINVen");
+				potion.HP = 1;
 				POTIONprefab.GetComponent<Image>().sprite = CURE;
 				invcount[5] -=1;
-				for(int x = 0; x < 6;x++)
-				{
-
-					if(frsting == PlayerInv[x])
-					{
-						invcount[x] -=1;
-					}
-				}
+				invcount[3] -=1;
+			
+			}
+			else if(scnding == "Venom" && frsting == "Mushroom")
+			{
+				potion = getitembyID("WINVen");
+				potion.PWR = 1;
+				POTIONprefab.GetComponent<Image>().sprite = CURE;
+				invcount[5] -=1;
+				invcount[4] -=1;
 			}
 			else if(frsting == "Herb")
 			{
@@ -183,26 +191,48 @@ public class CraftingScript : MonoBehaviour {
 			potion = getitembyID("OILVen");
 			if(oilRDM == 0)
 			{
-			potion.STATUS = "NA";
+			potion.STATUS = "PSN";
+			if(frsting == "Herb")
+				{
+					potion.HP = -1;
+					invcount[3] -=1;
+				}
+				else if(frsting == "Mushroom")
+				{
+					potion.PWR = -1;
+					invcount[4] -= 1;
+				}
 			}
 			else if(oilRDM == 1)
 			{
 			potion.STATUS = "PSN";
+			if(frsting == "Herb")
+				{
+					potion.HP = 0;
+					invcount[3] -=1;
+				}
+				else if(frsting == "Mushroom")
+				{
+					potion.PWR = 0;
+					invcount[4] -= 1;
+				}
 			}
 			else if(oilRDM == 2)
 			{
-			potion.STATUS = "PSNRES";
+			potion.STATUS = "PSN";
+				if(frsting == "Herb")
+				{
+					potion.HP = 1;
+					invcount[3] -=1;
+				}
+				else if(frsting == "Mushroom")
+				{
+					potion.PWR = 1;
+					invcount[4] -= 1;
+				}
 			}
 			POTIONprefab.GetComponent<Image>().sprite = CURE;
 			invcount[5] -=1;
-			for(int x = 0; x < 6;x++)
-			{
-
-				if(frsting == PlayerInv[x])
-				{
-					invcount[x] -=1;
-				}
-			}
 		}
 		else if(frsting == "Herb")
 		{
@@ -259,22 +289,23 @@ public class CraftingScript : MonoBehaviour {
 		
 	
 		//temporarily disabled until merge; must be triggered in Hero list
-		/*
+		
 		public void giveHero()
 		{
 			string buttonname = EventSystem.current.currentSelectedGameObject.name;
-			StatClass Hero;
-			for(int x = 0; x < items.Count;x++)
+			StatClass Hero = new StatClass();
+			for(int x = 0; x < 3;x++)
 			{
-				if(Heroes[x].NAME == buttonname)
+				if(Heroes[x].stats.NAME == buttonname)
 				{
-					Hero = items[x];
+					Hero = Heroes[x].stats;
+					break;
 				}
 			}	
 			UsePotion(Hero, PlayerPTN);
 			
 		}
-		*/
+		
 		//temp use potion
 		public void tempUse()
 		{
@@ -288,34 +319,45 @@ public class CraftingScript : MonoBehaviour {
 		{
 			if(Potion.STATUS == "POTION")
 			{
-				Hero.HP += Potion.HP;
+				Hero.HP += Potion.HP;				
+				if(Hero.HP > Hero.MaxHP)
+				{
+					Hero.HP = Hero.MaxHP;
+				}
 				Destroy (_instance);
 				haspotion = false;
-				//need limiter to not exceed maxHP
 			}
 			else if(Potion.STATUS == "PSN")
 			{
 				Hero.STATUS = "NA";
+				Hero.HP += Potion.HP;
+				Hero.PWR += Potion.PWR;
+				if(Hero.HP > Hero.MaxHP)
+				{
+					Hero.HP = Hero.MaxHP;
+				}
 				Destroy (_instance);
 				haspotion = false;
+				
 			}
-			else if(Potion.STATUS == "PSNRES")
+			/*else if(Potion.STATUS == "PSNRES")
 			{
 				Hero.STATUS = "PSNRES";
 				//resistance only lasts 1 turn
-			}				
+			}	*/			
 			else if(Potion.STATUS == "ATK")
 			{
 				Hero.PWR += Potion.PWR;
 				Destroy (_instance);
 				haspotion = false;
+				Hero.BNSPWR = Potion.PWR;
 				//need variable to reset PWR to normal after next attack
 			}
-			else if(Potion.STATUS == "NA")
+			/*else if(Potion.STATUS == "NA")
 			{
 				Destroy (_instance);
 				Debug.Log("Nothing happened");
-			}
+			}*/
 			
 		}
 		
@@ -509,6 +551,4 @@ public class CraftingScript : MonoBehaviour {
 					
 				
 		}
-		
-		
 }
