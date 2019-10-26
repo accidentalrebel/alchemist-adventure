@@ -8,11 +8,10 @@ public class Hero_Archer : Battle_npc {
 	public TMP_Text hplabel; //for the HP Bar
 	
 	void Start () {
-		
+		ailments = new Ailments ();
 		//Name, HP, PWR, STATUS, SPD, PRICE, MAXHP
 		Setup(new StatClass ("Archer", 5, 6, "NA", 10f, 0, 5));
-		
-		Debug.Log("archer ready");
+
 	}
 	
 	void Update () {
