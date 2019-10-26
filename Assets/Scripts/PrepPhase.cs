@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.UI;
 using System.Linq;
 using UnityEngine.EventSystems;
 using TMPro;
@@ -15,6 +16,8 @@ public class PrepPhase : MonoBehaviour {
     public TMP_Text goldValue;
     public int goldTotal;
 
+    public Image[] imageIcons = new Image[6];
+    public GameObject[] icons = new GameObject[3];
     public string[] ingredientList = { "Water", "Oil", "Wine" };
     List<string> displayIngredients;
 
@@ -28,6 +31,7 @@ public class PrepPhase : MonoBehaviour {
     {
         goldTotal = player.gold;
         goldValue.text = goldTotal.ToString();
+
         displayIngredients = new List<string>();
         displayIngredients = Enumerable.ToList(Enumerable.Distinct(displayIngredients));
 
@@ -68,11 +72,14 @@ public class PrepPhase : MonoBehaviour {
         int count = 0;
         while (count < 3)
         {
-            Ingredients ingredient = ingredients[Random.Range(0, ingredients.Length)];
+            
+            int iconOrder = (Random.Range(0, ingredients.Length));
+            Ingredients ingredient = ingredients[iconOrder];
             string random = ingredient.ingredientName;
             
             if (!displayIngredients.Contains(random))
             {
+                icons[count].GetComponent<Image>().sprite = imageIcons[iconOrder].sprite;
                 IngredientName[count].text = random;
                 IngredientPrice[count].text = ingredient.ingredientPrice.ToString();
                 displayIngredients.Add(IngredientName[count].text);
@@ -92,6 +99,8 @@ public class PrepPhase : MonoBehaviour {
             int detectitem = int.Parse(whichitem);
 
             invmanager.buyItems(IngredientName[detectitem].text);
+            Player.invmanager = invmanager;
+            
         }
     
   

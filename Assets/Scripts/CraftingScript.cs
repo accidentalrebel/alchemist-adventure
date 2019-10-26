@@ -8,10 +8,11 @@ using UnityEngine.EventSystems;
 public class CraftingScript : MonoBehaviour {
 	public 	List<StatClass> items;
 	public float cauldronCD;
-	//playerinventory need to be changed based on quest selection
-	InvManager ingredients = new InvManager();
+    //playerinventory need to be changed based on quest selection
+    //InvManager ingredients = new InvManager();
+    public Player player;
 	string[] PlayerInv = {"Water", "Oil", "Wine", "Herb", "Mushroom","Venom"};
-	int[] invcount = {5,5,5,5,5,5} ;
+	int[] invcount = new int[6];
 	StatClass PlayerPTN;
 	bool haspotion = false;
 	bool cancraft = true;
@@ -59,9 +60,9 @@ public class CraftingScript : MonoBehaviour {
 		{
 			for (int y = 0; y< 6;y++)
 			{
-			if(ingredients.items[y] == PlayerInv[x])
+			if(Player.invmanager.items[y] == PlayerInv[x])
 			{
-				invcount[x]=ingredients.count[y];
+				invcount[x]=Player.invmanager.count[y];
 			}
 			}
 		}
