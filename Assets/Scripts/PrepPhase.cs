@@ -116,6 +116,6 @@ public class PrepPhase : MonoBehaviour {
 
   public void loadBattle()
     {
-        SceneManager.LoadScene("BattleSystem-Logic");
+        SceneManager.LoadScene("BattleSystem");
     }
 }
