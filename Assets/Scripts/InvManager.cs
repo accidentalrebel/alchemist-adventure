@@ -1,6 +1,7 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 
 public class InvManager: MonoBehaviour
  {
@@ -21,8 +22,7 @@ public class InvManager: MonoBehaviour
             }
          
         }
-	}
-	
+
 	public void setCount(string name, int amount)
 	{
 		for(int x = 0; x <6; x++)

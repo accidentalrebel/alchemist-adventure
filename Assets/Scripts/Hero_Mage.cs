@@ -9,6 +9,7 @@ public class Hero_Mage : Battle_npc {
 	
 	void Start () {
 		
+		//Name, HP, PWR, STATUS, SPD, PRICE, MAXHP
 		Setup(new StatClass ("Mage", 3, 7, "NA", 20f, 0, 3));
 		
 		Debug.Log("mage ready");

@@ -10,7 +10,8 @@ public class Enemy_Snake : Battle_npc {
 
 	void Start () {
 		
-		Setup(new StatClass ("Snake", 100, 2, "NA", 18f, 0, 20));
+		//Name, HP, PWR, STATUS, SPD, PRICE, MAXHP
+		Setup(new StatClass ("Snake", 50, 2, "NA", 18f, 0, 20));
 		
 		Debug.Log("snake ready");
 	}

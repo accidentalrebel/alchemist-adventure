@@ -1,14 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Battle_npc : MonoBehaviour  {
 	
 	//References
 	public StatClass stats;
 	public Timerbar timerbar;
-	public Battle_npc[] heroes;
+	public Battle_npc[] heroes; //<-- hero array reference
 	public Battle_npc enemy;
+	public Transform canvas;
+	
+	public TMP_Text damagePrefab;
+	public bool isDead = false;
+	//int bonusPWR = 2; << BONUSPOWER 
+	
   
 	
 	public void Setup(StatClass stats) {
@@ -32,54 +39,91 @@ public class Battle_npc : MonoBehaviour  {
 		
 		if ( stats.TIMER <= 0 ) {
 			
-			Debug.Log("hero " + stats.NAME + " turn finished");
 			
 			//Hero Attacks
 			if ( this.gameObject.tag == "Player") {
 				OnAttackHero();
+				
 			}
-			
-			
+	
 			//Enemy Attacks
 			if ( this.gameObject.tag == "Enemy") {
 				OnAttackEnemy();
 			}
 			
+			//Debug.Log("hero " + stats.NAME + " turn finished");
+			
 			stats.TIMER = stats.SPD;
-		}
+		}	
 		
 		//Timer Bar
 		timerbar.SetSize((stats.TIMER/stats.SPD));
 		
 		//Damage and Death
 		if (stats.HP <= 0 ) {
+			this.isDead = true;
 			Death();
-		}
-
-		
-		
+		}	
 	}
 	
 	public void OnAttackHero () {
 		
-		enemy.stats.HP -= this.stats.PWR;
-		Debug.Log("hero " + stats.NAME + " attacked the enemy");
+		if ( enemy.isDead == false ) {
+			enemy.stats.HP -= this.stats.PWR;
+			Debug.Log("hero " + stats.NAME + " attacked the " + enemy.stats.NAME );
+			//this.stats.PWR -= bonusPWR;
+			TakeDamage(enemy);
+			
+			//Damage Counter
+			/*TMP_Text damageenemy = Instantiate(damagePrefab);
+			damageenemy.transform.SetParent(canvas);
+			damageenemy.text = this.stats.PWR.ToString();*/
+			
+		}
+		
+		else {
+			Victory();
+		}
 		
 	}
 	
 	public void OnAttackEnemy () {
 		
-		heroes[Random.Range(0,3)].stats.HP -= this.stats.PWR;
-		Debug.Log(stats.NAME + " attacked the hero");
+		int roll = Random.Range(0, 3); //<--checks which hero to target.
+		if ( heroes[roll].isDead == false ) {
+			heroes[roll].stats.HP -= this.stats.PWR;
+			Debug.Log(stats.NAME + " attacked the " + heroes[roll].stats.NAME );
+			TakeDamage(heroes[roll]);
+		}
+		
+		else {
+			OnAttackEnemy();
+		}
 		
 	}
 	
-	public void Death() {
-
+	public void Victory () {
+		if ( enemy.isDead == true && enemy.stats.HP <= 0 ) {
+			Debug.Log("YOU WIN!");
+		}
+	}
+	
+	public void TakeDamage (Battle_npc target) { //<--put the target in the ()
+		
+			TMP_Text damageCounter = Instantiate(damagePrefab);
+			damageCounter.transform.SetParent(canvas);
+			damageCounter.text = this.stats.PWR.ToString();
+			Vector3 newPos = Camera.main.WorldToScreenPoint(target.transform.position);
+			damageCounter.transform.position = newPos;
+	}
+	
+	public void Death () {
+		
         Destroy(this.gameObject);
-		Debug.Log ( stats.NAME + "is dead");
+		Debug.Log ( stats.NAME + " is dead");
 		
 	}
+	
 	
 	
 
