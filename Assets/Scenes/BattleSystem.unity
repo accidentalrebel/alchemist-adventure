@@ -5813,7 +5813,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0ea4424b0cb81a47814317ce57850f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  items: []
   cauldronCD: 0
+  player: {fileID: 0}
   POTIONprefab: {fileID: 1377960685995322, guid: fe1a17ee0f1f1e64bad3acfd135b6e81,
     type: 2}
   cauldron: {fileID: 1496091056}
@@ -5840,6 +5842,10 @@ MonoBehaviour:
   - {fileID: 1434951966}
   - {fileID: 1798059945}
   activeSelf: 0
+  Heroes:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &1496091059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7410,7 +7416,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1905015539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7422,6 +7428,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33c1e9ddbcb68cd4e80662b580bc89ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stats:
+    NAME: 
+    HP: 0
+    PWR: 0
+    STATUS: 
+    SPD: 0
+    PRICE: 0
+    MaxHP: 0
+    TIMER: 0
+    isDead: 0
+    hasAttacked: 0
+    BNSPWR: 0
   timerbar: {fileID: 0}
   heroes:
   - {fileID: 2031720291}
