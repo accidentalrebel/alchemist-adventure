@@ -11,6 +11,7 @@ public class CraftingScript : MonoBehaviour {
 	//playerinventory need to be changed based on quest selection
 	//InvManager ingredients = new InvManager();
 	public Player player;
+
 	string[] PlayerInv = {"Water", "Oil", "Wine", "Herb", "Mushroom","Venom"};
 	int[] invcount = new int[6];
 	StatClass PlayerPTN;

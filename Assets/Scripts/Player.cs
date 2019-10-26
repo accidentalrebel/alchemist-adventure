@@ -9,6 +9,7 @@ public class Player : MonoBehaviour {
 
     public int gold;
     public int fame;
+    public static InvManager invmanager;
 
 
 
