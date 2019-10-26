@@ -7,12 +7,14 @@ public class Battle_npc : MonoBehaviour  {
 	
 	//References
 	public StatClass stats;
+	public Ailments ailments;
 	public Timerbar timerbar;
 	public Battle_npc[] heroes; //<-- hero array reference
 	public Battle_npc enemy;
 	public Transform canvas;
 	
 	public TMP_Text damagePrefab;
+	public TMP_Text poisonPrefab;
 	public bool isDead = false;
 	//int bonusPWR = 2; << BONUSPOWER 
 	
@@ -23,9 +25,10 @@ public class Battle_npc : MonoBehaviour  {
 		stats.TIMER = stats.SPD;
 	}
 	
-	void Start() {
+	protected void Start() {
 		
 		Debug.Log("battle start");
+
 
 	}
 
@@ -42,16 +45,33 @@ public class Battle_npc : MonoBehaviour  {
 			
 			//Hero Attacks
 			if ( this.gameObject.tag == "Player") {
-				OnAttackHero();
+				if (this.stats.STATUS == "NA" ) {
+					onAttackHero();
+				}
 				
+				if ( this.stats.STATUS == "PSN" ) {
+					onAttackHero();
+					ailments.isPoisoned(this);
+				}
 			}
 	
 			//Enemy Attacks
 			if ( this.gameObject.tag == "Enemy") {
-				OnAttackEnemy();
+				
+				//if ( this.stats.HP > this.stats.MaxHP * 0.75f ) {
+				//onAttackEnemy();
+				//}
+				//else {
+					Battle_npc target = onAttackEnemy ();
+					ailments.poisonAttack (target);
+					if (target.stats.STATUS == "PSN") {
+						Debug.Log(target.stats.NAME + " is poisoned");
+					}
+					if (target.stats.STATUS == "NA") {
+						Debug.Log(target.stats.NAME + " did not get poisoned");
+					}
+				//}
 			}
-			
-			//Debug.Log("hero " + stats.NAME + " turn finished");
 			
 			stats.TIMER = stats.SPD;
 		}	
@@ -66,18 +86,13 @@ public class Battle_npc : MonoBehaviour  {
 		}	
 	}
 	
-	public void OnAttackHero () {
+	public void onAttackHero () {
 		
 		if ( enemy.isDead == false ) {
 			enemy.stats.HP -= this.stats.PWR;
-			Debug.Log("hero " + stats.NAME + " attacked the " + enemy.stats.NAME );
+			//Debug.Log("hero " + stats.NAME + " attacked the " + enemy.stats.NAME );
 			//this.stats.PWR -= bonusPWR;
-			TakeDamage(enemy);
-			
-			//Damage Counter
-			/*TMP_Text damageenemy = Instantiate(damagePrefab);
-			damageenemy.transform.SetParent(canvas);
-			damageenemy.text = this.stats.PWR.ToString();*/
+			takeDamage(enemy);
 			
 		}
 		
@@ -87,18 +102,19 @@ public class Battle_npc : MonoBehaviour  {
 		
 	}
 	
-	public void OnAttackEnemy () {
-		
-		int roll = Random.Range(0, 3); //<--checks which hero to target.
-		if ( heroes[roll].isDead == false ) {
-			heroes[roll].stats.HP -= this.stats.PWR;
-			Debug.Log(stats.NAME + " attacked the " + heroes[roll].stats.NAME );
-			TakeDamage(heroes[roll]);
+	public Battle_npc onAttackEnemy () {
+		int roll = 0;
+		while (true) {
+			roll = Random.Range(0, 3); //<--checks which hero to target.
+			if ( heroes[roll].isDead == false ) {
+				heroes[roll].stats.HP -= this.stats.PWR;
+				//Debug.Log(stats.NAME + " attacked the " + heroes[roll].stats.NAME );
+				takeDamage(heroes[roll]);
+				break;
+			}
 		}
 		
-		else {
-			OnAttackEnemy();
-		}
+		return heroes[roll];
 		
 	}
 	
@@ -108,7 +124,7 @@ public class Battle_npc : MonoBehaviour  {
 		}
 	}
 	
-	public void TakeDamage (Battle_npc target) { //<--put the target in the ()
+	public void takeDamage (Battle_npc target) { //<--put the target in the ()
 		
 			TMP_Text damageCounter = Instantiate(damagePrefab);
 			damageCounter.transform.SetParent(canvas);
@@ -116,6 +132,16 @@ public class Battle_npc : MonoBehaviour  {
 			Vector3 newPos = Camera.main.WorldToScreenPoint(target.transform.position);
 			damageCounter.transform.position = newPos;
 	}
+	
+	public void takePoisonDamage (Battle_npc target) { //<--put the target in the ()
+		
+			TMP_Text poisonCounter = Instantiate(poisonPrefab);
+			poisonCounter.color = new Color(0,0.75f,0,1);
+			poisonCounter.transform.SetParent(canvas);
+			poisonCounter.text = ailments.poisonDamage.ToString();
+			Vector3 newPos = Camera.main.WorldToScreenPoint(target.transform.position);
+			poisonCounter.transform.position = newPos;
+	}	
 	
 	public void Death () {
 		

@@ -10,7 +10,7 @@ float damagetime = 1f;
 	
 		damagetime -= Time.deltaTime;
 		if ( damagetime <= 0 ) {	
-			Debug.Log("ouch!");
+			//Debug.Log("ouch!");
 			Destroy(this.gameObject);
 		}
 	}

@@ -5,26 +5,24 @@ using TMPro;
 
 public class Enemy_Snake : Battle_npc {
 	
-	//For the future HP Bar
-	//public TMP_Text hplabel;
+	public TMP_Text hplabel; //for the HP Bar 
 
 	void Start () {
-		
+		ailments = new Ailments ();
 		//Name, HP, PWR, STATUS, SPD, PRICE, MAXHP
-		Setup(new StatClass ("Snake", 50, 2, "NA", 18f, 0, 20));
-		
-		Debug.Log("snake ready");
+		Setup(new StatClass ("Snake", 100, 2, "NA", 8f, 0, 100));
+
 	}
 	
 	void Update () {
 		base.Update();
 		
-		/*if (stats.HP <= 0) {
+		if (stats.HP <= 0) {
 			hplabel.text = "HP " + 0 + "/" + stats.MaxHP;
 		}
 		if (stats.HP >= 1) {
 			hplabel.text = "HP " + stats.HP + "/" + stats.MaxHP;
 		}
-		*/
+		
 	}
 }
