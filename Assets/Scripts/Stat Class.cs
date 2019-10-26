@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class StatClass
 {
+	
     public string NAME;
     public int HP;
     public int PWR;
@@ -17,7 +19,10 @@ public class StatClass
 	public int BNSPWR; //Added a Bonus PWR variable for buffs -Pam
 
 		
-	
+	public StatClass()
+	{
+		
+	}
 
     public StatClass(string NAME, int HP, int PWR, string STATUS, float SPD, int PRICE, int MaxHP = 0)
     {
