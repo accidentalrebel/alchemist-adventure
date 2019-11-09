@@ -26,7 +26,9 @@ public class PrepPhase : MonoBehaviour {
 
 	//for shelf
 	public TMP_Text[] itemcount;
-
+	//for Rewardscreen
+	public bool allGold = false;
+	public Text RewardButton;
 
     // Use this for initialization
     public void Start()
@@ -108,12 +110,11 @@ public class PrepPhase : MonoBehaviour {
             {
 					
 					player.gold -= ingredients[x].ingredientPrice;
-					goldValue.text = player.gold.ToString();
 
 			}
 			else
 			{
-				Debug.Log("Not enough Gold");
+				Debug.Log("Not enough Gold");	
 			}
 				
 			}
@@ -130,12 +131,45 @@ public class PrepPhase : MonoBehaviour {
 			itemcount[x].text = invmanager.count[x].ToString();
 		}
 		
-		
-		
+		goldValue.text = 
+		player.gold.ToString();
+		if(allGold == false)
+		{
+		    if ( RewardButton != null ) {
+			RewardButton.text = "Convert to Gold";
+		    }
+		}
+		else
+		{
+		    if ( RewardButton != null ) {
+			RewardButton.text = "Back to Menu";
+		    }
+		}
 	}
 
   public void loadBattle()
     {
         SceneManager.LoadScene("BattleSystem");
+		allGold = false;
     }
+	
+	public void EndButton()
+	{
+		if(allGold == false)
+		{
+			for(int x = 0; x < 6; x++)
+		{
+			player.gold += (ingredients[x].ingredientPrice*invmanager.count[x]);
+			invmanager.count[x] = 0;
+			allGold = true;
+			
+		}
+		Player.invmanager = invmanager;
+		}
+		else
+		{
+			SceneManager.LoadScene("QuestMenu");
+		}
+	}
+
 }
