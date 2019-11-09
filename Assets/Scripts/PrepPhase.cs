@@ -24,6 +24,8 @@ public class PrepPhase : MonoBehaviour {
     public Ingredients[] ingredients = new Ingredients[6];
     public InvManager invmanager;
 
+	//for shelf
+	public TMP_Text[] itemcount;
 
 
     // Use this for initialization
@@ -106,13 +108,24 @@ public class PrepPhase : MonoBehaviour {
 			player.gold -= ingredients[x].ingredientPrice;
 			goldValue.text = player.gold.ToString();
 			}
+				
 			}
             Player.invmanager = invmanager;
 			
             
         }
     
-  
+  	void Update () {
+
+		//shelf? need to get parent name
+		for(int x = 0; x < 6; x++)
+		{
+			itemcount[x].text = invmanager.count[x].ToString();
+		}
+		
+		
+		
+	}
 
   public void loadBattle()
     {
