@@ -289,8 +289,10 @@ public class CraftingScript : MonoBehaviour {
 					break;
 				}
 			}	
+			if(haspotion == true)
+			{
 			UsePotion(Hero, PlayerPTN);
-			
+			}
 		}
 		
 		

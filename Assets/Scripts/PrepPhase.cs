@@ -102,13 +102,13 @@ public class PrepPhase : MonoBehaviour {
 		
             string whichitem = EventSystem.current.currentSelectedGameObject.name;
             int detectitem = int.Parse(whichitem);
-            invmanager.buyItems(IngredientName[detectitem].text);
+            
 			for (int x = 0; x < 6; x++)
 			{
 
             if (IngredientName[detectitem].text == ingredients[x].ingredientName && player.gold-ingredients[x].ingredientPrice > 0)
             {
-					
+					invmanager.buyItems(IngredientName[detectitem].text);
 					player.gold -= ingredients[x].ingredientPrice;
 
 			}
