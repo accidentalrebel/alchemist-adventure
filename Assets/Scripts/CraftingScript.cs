@@ -11,6 +11,7 @@ public class CraftingScript : MonoBehaviour {
 	//playerinventory need to be changed based on quest selection
 	//InvManager ingredients = new InvManager();
 	public Player player;
+	public InvManager invmanager;
 
 	string[] PlayerInv = {"Water", "Oil", "Wine", "Herb", "Mushroom","Venom"};
 	int[] invcount = new int[6];
@@ -542,6 +543,7 @@ public class CraftingScript : MonoBehaviour {
 			if(Player.invmanager.items[y] == PlayerInv[x])
 			{
 				Player.invmanager.count[y] = invcount[x];
+				invmanager.count[y] = invcount[x];
 			}
 			}
 		}
