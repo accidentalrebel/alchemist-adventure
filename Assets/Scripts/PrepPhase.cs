@@ -97,16 +97,23 @@ public class PrepPhase : MonoBehaviour {
     }
 
     public void pressBuy() {
+		
             string whichitem = EventSystem.current.currentSelectedGameObject.name;
             int detectitem = int.Parse(whichitem);
             invmanager.buyItems(IngredientName[detectitem].text);
 			for (int x = 0; x < 6; x++)
 			{
 
-            if (IngredientName[detectitem].text == ingredients[x].ingredientName)
+            if (IngredientName[detectitem].text == ingredients[x].ingredientName && player.gold-ingredients[x].ingredientPrice > 0)
             {
-			player.gold -= ingredients[x].ingredientPrice;
-			goldValue.text = player.gold.ToString();
+					
+					player.gold -= ingredients[x].ingredientPrice;
+					goldValue.text = player.gold.ToString();
+
+			}
+			else
+			{
+				Debug.Log("Not enough Gold");
 			}
 				
 			}

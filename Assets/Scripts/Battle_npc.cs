@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using TMPro;
 
@@ -84,6 +85,15 @@ public class Battle_npc : MonoBehaviour  {
 			this.isDead = true;
 			Death();
 		}	
+		
+		if(heroes[0].isDead == true && heroes[1].isDead == true && heroes[2].isDead == true)
+		{
+			SceneManager.LoadScene("LoseBattle");
+		}
+		if ( enemy.isDead == true)
+		{
+			Victory();
+		}
 	}
 	
 	public void onAttackHero () {
@@ -121,6 +131,7 @@ public class Battle_npc : MonoBehaviour  {
 	public void Victory () {
 		if ( enemy.isDead == true && enemy.stats.HP <= 0 ) {
 			Debug.Log("YOU WIN!");
+			SceneManager.LoadScene("WinBattle");
 		}
 	}
 	
