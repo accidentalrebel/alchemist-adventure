@@ -14,6 +14,7 @@ public class CraftingScript : MonoBehaviour {
 
 	string[] PlayerInv = {"Water", "Oil", "Wine", "Herb", "Mushroom","Venom"};
 	int[] invcount = new int[6];
+	public Image[] InvIMG = new Image[6];
 	StatClass PlayerPTN;
 	bool haspotion = false;
 	bool cancraft = true;
@@ -33,8 +34,7 @@ public class CraftingScript : MonoBehaviour {
 	public GameObject[] Box = new GameObject[3];
 	//for shelf
 	public TMP_Text[] itemcount;
-	private GameObject childObj;
-	public bool activeSelf;
+	//private GameObject childObj;
 	
 	//gethero
 	public Battle_npc[] Heroes = new Battle_npc[3];
@@ -76,19 +76,8 @@ public class CraftingScript : MonoBehaviour {
 	}
 	
 	void Update () {
-			/*player inventory
-		for(int x = 0; x < 5; x++)
-		{
-			Debug.Log(PlayerInv[x]);
-			Debug.Log(invcount[x]);
-		}*/
-		
-			//need visual indicator of timer
 		
 		cauldronCD -= Time.deltaTime;
-		
-				
-		//shelf? need to get parent name
 		for(int x = 0; x < 6; x++)
 		{
 			itemcount[x].text = invcount[x].ToString();
@@ -112,7 +101,7 @@ public class CraftingScript : MonoBehaviour {
 		return null;
 	}
 	
-	//asign potion
+	//Crafting Function
     public void Craft(string BASE, string frsting,string scnding)
     {
 		StatClass potion = null;
@@ -278,18 +267,14 @@ public class CraftingScript : MonoBehaviour {
 		
 		invcount[1] -=1;
 		}
-		//need function to give hero script the potion
 		PlayerPTN = potion;		
 		//cauldron cooldown
 		cauldronCD = potion.SPD;
-
-		
-
 		//Debug.Log("Success " + BASE + frsting + scnding + PlayerPTN.NAME);
 	}
+	//Crafting Function
 		
 	
-		//temporarily disabled until merge; must be triggered in Hero list
 		
 		public void giveHero()
 		{
@@ -307,15 +292,9 @@ public class CraftingScript : MonoBehaviour {
 			
 		}
 		
-		//temp use potion
-		public void tempUse()
-		{
-			Destroy(_instance);
-			haspotion = false;
-		}
 		
 		
-	
+		//Use Potion on Hero
 		public void UsePotion(StatClass Hero, StatClass Potion)
 		{
 			if(Potion.STATUS == "POTION")
@@ -361,9 +340,9 @@ public class CraftingScript : MonoBehaviour {
 			}*/
 			
 		}
+		//Use Potion on Hero
 		
-		
-		
+		//Mix Button
 		public void OnMix()
 		{
 		
@@ -435,19 +414,23 @@ public class CraftingScript : MonoBehaviour {
 				Debug.Log("sumthing wrong?" + haspotion + cauldronCD + cancraft);
 			}
 		}
+		//Mix Button
 		
 		//add items from drops
-		public void additem(string name)
+		public void DropStuff()
 		{
-			for (int y = 0; y< 6;y++)
+			int IsDrop = 0;
+			int DropItem;
+			IsDrop = Random.Range(1,30);
+			if(IsDrop<=10)
 			{
-			if(name == PlayerInv[y])
-			{
-				invcount[y]++;
-			}
+				DropItem = Random.Range(0,5);
+				invcount[DropItem]++;
+				//instatitiate dropped item
+				
 			}
 		}
-
+		//add items from drop
 		
 		//shelf stuff
 		public void itemSelect()
@@ -548,8 +531,19 @@ public class CraftingScript : MonoBehaviour {
 					Box[2].GetComponent<Image>().sprite = EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite;
 				}
 			}	
-
-					
-				
+		}
+		//shelf stuff
+		public void endInv()
+		{
+			for (int x = 0; x < 6; x++)
+		{
+			for (int y = 0; y< 6;y++)
+			{
+			if(Player.invmanager.items[y] == PlayerInv[x])
+			{
+				Player.invmanager.count[y] = invcount[x];
+			}
+			}
+		}
 		}
 }
