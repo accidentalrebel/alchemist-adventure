@@ -6,13 +6,13 @@ public class InvManager: MonoBehaviour
 {
 
 
-	public string[] items = {"Water", "Oil", "Wine", "Herb", "Mushroom","Venom"};
-	public int[] count = {5,5,5,5,5,5};
+	public string[] items = {"Water", "Oil", "Wine", "Herb", "Mushroom", "Coffee", "Venom", "Salts", "Incense"};
+	public int[] count = {5,5,5,5,5,5,5,5,5};
 
 
     public void buyItems(string name)
     {
-        for (int x = 0; x < 6; x++)
+        for (int x = 0; x < 9; x++)
         {
 
             if (name == items[x])
@@ -26,7 +26,7 @@ public class InvManager: MonoBehaviour
 	public void setCount(string name, int amount)
 
 	{
-		for (int x = 0; x < 6; x++)
+		for (int x = 0; x < 9; x++)
 		{
 				if(name == items[x])
 				{
