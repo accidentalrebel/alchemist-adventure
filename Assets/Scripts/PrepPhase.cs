@@ -16,12 +16,12 @@ public class PrepPhase : MonoBehaviour {
     public TMP_Text goldValue;
     public int goldTotal;
 
-    public Image[] imageIcons = new Image[6];
+    public Image[] imageIcons = new Image[9];
     public GameObject[] icons = new GameObject[3];
     public string[] ingredientList = { "Water", "Oil", "Wine" };
     List<string> displayIngredients;
 
-    public Ingredients[] ingredients = new Ingredients[6];
+    public Ingredients[] ingredients = new Ingredients[9];
     public InvManager invmanager;
 
 	//for shelf
@@ -47,12 +47,12 @@ public class PrepPhase : MonoBehaviour {
         ingredients[0].ingredientQuantity = 1;
 
         ingredients[1] = new Ingredients();
-        ingredients[1].ingredientName = "Wine";
+        ingredients[1].ingredientName = "Oil";
         ingredients[1].ingredientPrice = 5;
         ingredients[1].ingredientQuantity = 1;
 
         ingredients[2] = new Ingredients();
-        ingredients[2].ingredientName = "Oil";
+        ingredients[2].ingredientName = "Wine";
         ingredients[2].ingredientPrice = 7;
         ingredients[2].ingredientQuantity = 1;
 
@@ -67,9 +67,24 @@ public class PrepPhase : MonoBehaviour {
         ingredients[4].ingredientQuantity = 1;
 
         ingredients[5] = new Ingredients();
-        ingredients[5].ingredientName = "Venom";
+        ingredients[5].ingredientName = "Coffee"; //new
         ingredients[5].ingredientPrice = 8;
         ingredients[5].ingredientQuantity = 1;
+		
+		ingredients[6] = new Ingredients();
+        ingredients[6].ingredientName = "Venom";
+        ingredients[6].ingredientPrice = 8;
+        ingredients[6].ingredientQuantity = 1;
+		
+		ingredients[7] = new Ingredients();
+        ingredients[7].ingredientName = "Salts"; //new
+        ingredients[7].ingredientPrice = 8;
+        ingredients[7].ingredientQuantity = 1;
+		
+		ingredients[8] = new Ingredients();
+        ingredients[8].ingredientName = "Incense"; //new
+        ingredients[8].ingredientPrice = 8;
+        ingredients[8].ingredientQuantity = 1;
 
 
 
@@ -103,7 +118,7 @@ public class PrepPhase : MonoBehaviour {
             string whichitem = EventSystem.current.currentSelectedGameObject.name;
             int detectitem = int.Parse(whichitem);
             
-			for (int x = 0; x < 6; x++)
+			for (int x = 0; x < 9; x++)
 			{
 
             if (IngredientName[detectitem].text == ingredients[x].ingredientName && player.gold-ingredients[x].ingredientPrice > 0)
@@ -126,7 +141,7 @@ public class PrepPhase : MonoBehaviour {
   	void Update () {
 
 		//shelf? need to get parent name
-		for(int x = 0; x < 6; x++)
+		for(int x = 0; x < 9; x++)
 		{
 			itemcount[x].text = invmanager.count[x].ToString();
 		}
@@ -157,7 +172,7 @@ public class PrepPhase : MonoBehaviour {
 	{
 		if(allGold == false)
 		{
-			for(int x = 0; x < 6; x++)
+			for(int x = 0; x < 9; x++)
 		{
 			player.gold += (ingredients[x].ingredientPrice*invmanager.count[x]);
 			invmanager.count[x] = 0;
