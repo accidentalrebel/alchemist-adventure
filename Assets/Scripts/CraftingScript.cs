@@ -30,7 +30,7 @@ public class CraftingScript : MonoBehaviour {
 	public Sprite SPD;
 	public Sprite STN;
 	public Sprite CNF;
-
+	
 	//For selecting Ingredient
 	public TMP_Text[] itemText = new TMP_Text[3];
 	public Image[] itemImage = new Image[3];
@@ -38,6 +38,11 @@ public class CraftingScript : MonoBehaviour {
 	public GameObject[] Box = new GameObject[3];
 	//for shelf
 	public TMP_Text[] itemcount;
+	//for belt
+	public StatClass[] Belt = new StatClass[3];
+	public string whichBelt;
+	public Sprite beltDefault;
+	
 	//private GameObject childObj;
 	
 	//gethero
@@ -458,6 +463,19 @@ public class CraftingScript : MonoBehaviour {
 			}	
 			Destroy (_instance);
 			haspotion = false;
+			PlayerPTN = null;
+			GameObject theBelt = GameObject.Find("Belt");
+			Image[] oldimages = theBelt.gameObject.GetComponentsInChildren<Image>();
+				for(x = 0; x < oldimage.Lenght; x+)
+				{
+					if(x%2==1)
+					{
+						oldimage[x].gameObject.SetActive(false)
+					}
+				}
+			GameObject theitem = theBelt.gameObject.transform.Find(whichBelt);
+			theitem.GetComponent<image>.sprite = beltDefault;
+			
 		}
 		//Use Potion on Hero
 		
@@ -605,7 +623,6 @@ public class CraftingScript : MonoBehaviour {
 					Image oldimage = oldimages[1];
 					oldimage.gameObject.SetActive(false);				
 					theimage.gameObject.SetActive(true);
-					theimage.gameObject.SetActive(true);
 					Debug.Log(itemselect.NAME + " is seleceted");
 					Item[1] = itemselect.NAME;
 					Box[1].gameObject.SetActive(true);
@@ -635,7 +652,6 @@ public class CraftingScript : MonoBehaviour {
 					Image oldimage = oldimages[1];
 					oldimage.gameObject.SetActive(false);				
 					theimage.gameObject.SetActive(true);
-					theimage.gameObject.SetActive(true);
 					Debug.Log(itemselect.NAME + " is seleceted");
 					Item[2] = itemselect.NAME;
 					Box[2].gameObject.SetActive(true);
@@ -657,19 +673,75 @@ public class CraftingScript : MonoBehaviour {
 				}
 			}	
 		}
-		//shelf stuff
+		
+		
+		//Potion Belt
+		public void Belt()
+		{
+			//setactive belt image
+			Image[] images = EventSystem.current.currentSelectedGameObject.GetComponentsInChildren<Image>(true);
+			Image theimage = images[1];
+			if(whichbelt == null)
+			{
+				whichBelt = EventSystem.current.currentSelectedGameObject.name;
+			}
+			else
+			{
+				GameObject unselect = GameObject.Find("Belt")'
+				Image[] oldimages = unselect.gameObject.GetComponentsInChildren<Image>();
+				for(x = 0; x < oldimage.Lenght; x+)
+				{
+					if(x%2==1)
+					{
+						oldimage[x].gameObject.SetActive(false)
+					}
+				}
+				whichBelt = EventSystem.current.currentSelectedGameObject.name;
+			}
+			int num = int.Parse(whichBelt);
+			
+			//to use potion
+			if(PlayerPTN == null)
+			{
+				//select potion from belt
+				if(Belt[num] != null)
+				{
+					theimage.GameObject.SetActive(true);
+					haspotion = true;
+					PlayerPTN = Belt[num];
+					thisselected = true;
+					POTIONprefab.GetComponent<Image>().sprite = this.GetComponent<Image>().sprite;
+				}
+			}
+			else
+			{
+				//to add potion to belt
+				if(Belt[num] == null)
+				{
+					Belt[num] = PlayerPTN;
+					haspotion = false;
+					PlayerPTN = null;
+					this.GetComponent<Image>().sprite = POTIONprefab.GetComponent<Image>().sprite;
+					Destroy(_instance);
+				}
+			}			
+		}
+		
+		
+		
+		//end inventory
 		public void endInv()
 		{
 			for (int x = 0; x < invcount.Lenght; x++)
-		{
-			for (int y = 0; y< Player.invmanager.items.Lenght;y++)
 			{
-			if(Player.invmanager.items[y] == PlayerInv[x])
-			{
-				Player.invmanager.count[y] = invcount[x];
-				invmanager.count[y] = invcount[x];
-			}
+				for (int y = 0; y< Player.invmanager.items.Lenght;y++)
+				{
+					if(Player.invmanager.items[y] == PlayerInv[x])
+					{
+						Player.invmanager.count[y] = invcount[x];
+						invmanager.count[y] = invcount[x];
+					}
+				}
 			}
 		}
-		}
-}
+		
