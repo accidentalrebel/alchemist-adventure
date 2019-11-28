@@ -480,7 +480,20 @@ public class CraftingScript : MonoBehaviour {
 						oldimages[x].gameObject.SetActive(false);
 					}
 				}
-			GameObject theitem = theBelt.gameObject.Find(whichBelt);
+			//GameObject theitem = theBelt.gameObject.Find(whichBelt);
+			
+			if(whichBelt == "1")
+			{
+				GameObject theitem = theBelt.transform.Find("1");
+			}
+			else if(whichBelt == "2")
+			{
+				GameObject theitem = theBelt.transform.Find("2");
+			}
+			if(whichBelt == "3")
+			{
+				GameObject theitem = theBelt.transform.Find("3");
+			}
 			theitem.GetComponent<Image>.sprite = beltDefault;
 			
 		}

@@ -160,9 +160,6 @@ public class Battle_npc : MonoBehaviour  {
 		Debug.Log ( stats.NAME + " is dead");
 		
 	}
-	
-	
-	
 
 	
 }
