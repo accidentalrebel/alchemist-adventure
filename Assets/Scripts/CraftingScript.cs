@@ -40,7 +40,7 @@ public class CraftingScript : MonoBehaviour {
 	public TMP_Text[] itemcount;
 	//for belt
 	public StatClass[] Belt = new StatClass[3];
-	public string whichBelt;
+	public string whichBelt = "";
 	public Sprite beltDefault;
 	
 	//private GameObject childObj;
@@ -101,7 +101,7 @@ public class CraftingScript : MonoBehaviour {
 	void Update () {
 		
 		cauldronCD -= Time.deltaTime;
-		for(int x = 0; x < invcount.Lenght; x++)
+		for(int x = 0; x < invcount.Length; x++)
 		{
 			itemcount[x].text = invcount[x].ToString();
 		}
@@ -151,7 +151,7 @@ public class CraftingScript : MonoBehaviour {
 					POTIONprefab.GetComponent<Image>().sprite = CNF;
 					invcount[8] -=1;
 				}
-				for(int x = 0; x < invcount.Lenght;x++)
+				for(int x = 0; x < invcount.Length;x++)
 				{
 
 					if(frsting == PlayerInv[x])
@@ -446,7 +446,6 @@ public class CraftingScript : MonoBehaviour {
 				Hero.HP += Potion.HP;
 				Hero.PWR += Potion.PWR;
 				Hero.BNSPWR = Potion.PWR;
-				Hero.stats.TIMER -= Potion.SPD;
 				if(Hero.HP > Hero.MaxHP)
 					{
 						Hero.HP = Hero.MaxHP;
@@ -459,22 +458,30 @@ public class CraftingScript : MonoBehaviour {
 			}
 			else if(Potion.STATUS == "SPD")
 			{
-				Hero.stats.TIMER -= Potion.PWR;
+				for(int x = 0; x < 3;x++)
+			{
+				if(Heroes[x].stats.NAME == Hero.NAME)
+				{
+					Heroes[x].stats.TIMER -= Potion.PWR;
+					break;
+				}
+			}	
+				
 			}	
 			Destroy (_instance);
 			haspotion = false;
 			PlayerPTN = null;
 			GameObject theBelt = GameObject.Find("Belt");
-			Image[] oldimages = theBelt.gameObject.GetComponentsInChildren<Image>();
-				for(x = 0; x < oldimage.Lenght; x+)
+			Image[] oldimages = theBelt.gameObject.GetComponentsInChildren<Image>(true);
+				for(int x = 0; x < oldimages.Length; x++)
 				{
 					if(x%2==1)
 					{
-						oldimage[x].gameObject.SetActive(false)
+						oldimages[x].gameObject.SetActive(false);
 					}
 				}
-			GameObject theitem = theBelt.gameObject.transform.Find(whichBelt);
-			theitem.GetComponent<image>.sprite = beltDefault;
+			GameObject theitem = theBelt.gameObject.Find(whichBelt);
+			theitem.GetComponent<Image>.sprite = beltDefault;
 			
 		}
 		//Use Potion on Hero
@@ -485,7 +492,7 @@ public class CraftingScript : MonoBehaviour {
 		
 			for (int y = 0; y < 3; y++)
 			{
-				for(int x = 0; x < invcount.Lenght; x++)
+				for(int x = 0; x < invcount.Length; x++)
 				{
 					if(Item[0] == null || Item[1] == null)
 					{
@@ -676,24 +683,24 @@ public class CraftingScript : MonoBehaviour {
 		
 		
 		//Potion Belt
-		public void Belt()
+		public void potionBelt()
 		{
 			//setactive belt image
 			Image[] images = EventSystem.current.currentSelectedGameObject.GetComponentsInChildren<Image>(true);
 			Image theimage = images[1];
-			if(whichbelt == null)
+			if(whichBelt == null)
 			{
 				whichBelt = EventSystem.current.currentSelectedGameObject.name;
 			}
 			else
 			{
-				GameObject unselect = GameObject.Find("Belt")'
+				GameObject unselect = GameObject.Find("Belt");
 				Image[] oldimages = unselect.gameObject.GetComponentsInChildren<Image>();
-				for(x = 0; x < oldimage.Lenght; x+)
+				for(int x = 0; x < oldimages.Length; x++)
 				{
 					if(x%2==1)
 					{
-						oldimage[x].gameObject.SetActive(false)
+						oldimages[x].gameObject.SetActive(false);
 					}
 				}
 				whichBelt = EventSystem.current.currentSelectedGameObject.name;
@@ -706,10 +713,10 @@ public class CraftingScript : MonoBehaviour {
 				//select potion from belt
 				if(Belt[num] != null)
 				{
-					theimage.GameObject.SetActive(true);
+					theimage.gameObject.SetActive(true);
 					haspotion = true;
 					PlayerPTN = Belt[num];
-					thisselected = true;
+					//thisselected = true;
 					POTIONprefab.GetComponent<Image>().sprite = this.GetComponent<Image>().sprite;
 				}
 			}
@@ -732,9 +739,9 @@ public class CraftingScript : MonoBehaviour {
 		//end inventory
 		public void endInv()
 		{
-			for (int x = 0; x < invcount.Lenght; x++)
+			for (int x = 0; x < invcount.Length; x++)
 			{
-				for (int y = 0; y< Player.invmanager.items.Lenght;y++)
+				for (int y = 0; y< Player.invmanager.items.Length;y++)
 				{
 					if(Player.invmanager.items[y] == PlayerInv[x])
 					{
@@ -744,4 +751,4 @@ public class CraftingScript : MonoBehaviour {
 				}
 			}
 		}
-		
+}
