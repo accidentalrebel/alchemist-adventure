@@ -38,6 +38,9 @@ public class CraftingScript : MonoBehaviour {
 	public GameObject[] Box = new GameObject[3];
 	//for shelf
 	public TMP_Text[] itemcount;
+	public GameObject Shelf;
+	Transform[] Ingredients = Shelf.getChild();
+	
 	//for belt
 	public StatClass[] Belt = new StatClass[3];
 	public string whichBelt = "";
@@ -105,10 +108,57 @@ public class CraftingScript : MonoBehaviour {
 		{
 			itemcount[x].text = invcount[x].ToString();
 		}
-		
-		
-		
-	}
+		//Setting ingredient box images
+		for(int x = 0; x < 3; x++)
+			{
+				if(Item[x] != null)
+				{
+					GameObject ForIngBox = GameObject.Find(Item[x]);
+					Box[x].gameObject.SetActive(true);
+					Box[x].GetComponent<Image>.sprite = ForIngBox.GetComponent<Image>().sprite;
+				}
+				else
+				{
+					Box[x].gameObject.SetActive(false);
+				}
+			}
+			/*
+		for(int x = 0; x < Ingredients.Length; x + 2)
+			{
+				
+				if(Item[x] != null)
+				{
+					GameObject ForIngBox = GameObject.Find(Item[x]);
+					Image[] images = ForIngBox.GetComponentsInChildren<Image>(true);
+					Image theimage = images[1];
+					theimage.gameObject.SetActive(true);
+					
+				}
+				else
+				{
+					Box[x].gameObject.SetActive(false);
+				}
+			}
+			*/
+		foreach(var child in Ingredients)
+		{
+			for(int x = 0; x < 3; x++)
+			{
+				
+				if (child.name == Item[x])
+				{
+					Image[] selection = child.GetComponentsInChildren<Image>(true);
+					Image selected =  selection[1];
+					selected.gameObject.SetActive(true);
+				}
+				else
+				{
+					Image[] selection = child.GetComponentsInChildren<Image>(true);
+					Image selected =  selection[1];
+					selected.gameObject.SetActive(false);
+				}
+			}
+		}
 	//which potion is it
 	StatClass getitembyID(string Name)
 	{
@@ -480,7 +530,7 @@ public class CraftingScript : MonoBehaviour {
 						oldimages[x].gameObject.SetActive(false);
 					}
 				}
-			//GameObject theitem = theBelt.gameObject.Find(whichBelt);
+			GameObject theitem = theBelt.gameobject.transform.Find(whichBelt); 
 			
 			if(whichBelt == "1")
 			{
@@ -615,22 +665,22 @@ public class CraftingScript : MonoBehaviour {
 					theimage.gameObject.SetActive(true);
 					Debug.Log(itemselect.NAME + " is seleceted");
 					Item[0] = itemselect.NAME;
-					Box[0].gameObject.SetActive(true);
-					Box[0].GetComponent<Image>().sprite = EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite;
+					//Box[0].gameObject.SetActive(true);
+					//Box[0].GetComponent<Image>().sprite = EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite;
 				}
 				else if(Item[0] == itemselect.NAME)
 				{
 					theimage.gameObject.SetActive(false);
 					Item[0] = null;
-					Box[0].gameObject.SetActive(false);
-					Box[0].GetComponent<Image>().sprite = EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite;
+					//Box[0].gameObject.SetActive(false);
+					//Box[0].GetComponent<Image>().sprite = EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite;
 				}
 				else
 				{
 					theimage.gameObject.SetActive(true);
 					Item[0] = itemselect.NAME;
-					Box[0].gameObject.SetActive(true);
-					Box[0].GetComponent<Image>().sprite = EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite;
+					//Box[0].gameObject.SetActive(true);
+					//Box[0].GetComponent<Image>().sprite = EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite;
 				}
 
 			}
@@ -645,22 +695,22 @@ public class CraftingScript : MonoBehaviour {
 					theimage.gameObject.SetActive(true);
 					Debug.Log(itemselect.NAME + " is seleceted");
 					Item[1] = itemselect.NAME;
-					Box[1].gameObject.SetActive(true);
-					Box[1].GetComponent<Image>().sprite = EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite;
+					//Box[1].gameObject.SetActive(true);
+					//Box[1].GetComponent<Image>().sprite = EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite;
 				}
 				else if(Item[1] == itemselect.NAME)
 				{
 					theimage.gameObject.SetActive(false);					
 					Item[1] = null;
-					Box[1].gameObject.SetActive(false);
-					Box[1].GetComponent<Image>().sprite = EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite;
+					//Box[1].gameObject.SetActive(false);
+					//Box[1].GetComponent<Image>().sprite = EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite;
 				}
 				else
 				{
 					theimage.gameObject.SetActive(true);
 					Item[1] = itemselect.NAME;
-					Box[1].gameObject.SetActive(true);
-					Box[1].GetComponent<Image>().sprite = EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite;
+					//Box[1].gameObject.SetActive(true);
+					//Box[1].GetComponent<Image>().sprite = EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite;
 				}
 			}
 			else if(itemselect.STATUS == "SECOND")
@@ -674,22 +724,22 @@ public class CraftingScript : MonoBehaviour {
 					theimage.gameObject.SetActive(true);
 					Debug.Log(itemselect.NAME + " is seleceted");
 					Item[2] = itemselect.NAME;
-					Box[2].gameObject.SetActive(true);
-					Box[2].GetComponent<Image>().sprite = EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite;
+					//Box[2].gameObject.SetActive(true);
+					//Box[2].GetComponent<Image>().sprite = EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite;
 				}
 				else if(Item[2] == itemselect.NAME)
 				{
 					theimage.gameObject.SetActive(false);
 					Item[2] = null;
-					Box[2].gameObject.SetActive(false);
-					Box[2].GetComponent<Image>().sprite = EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite;
+					//Box[2].gameObject.SetActive(false);
+					//Box[2].GetComponent<Image>().sprite = EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite;
 				}
 				else
 				{
 					theimage.gameObject.SetActive(true);
 					Item[2] = itemselect.NAME;
-					Box[2].gameObject.SetActive(true);
-					Box[2].GetComponent<Image>().sprite = EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite;
+					//Box[2].gameObject.SetActive(true);
+					//Box[2].GetComponent<Image>().sprite = EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite;
 				}
 			}	
 		}
