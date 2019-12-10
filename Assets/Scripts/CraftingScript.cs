@@ -42,6 +42,7 @@ public class CraftingScript : MonoBehaviour {
 	Transform[] Ingredients = Shelf.getChild();
 	
 	//for belt
+	https://docs.unity3d.com/ScriptReference/SpriteRenderer-sprite.html
 	public StatClass[] Belt = new StatClass[3];
 	public string whichBelt = "";
 	public Sprite beltDefault;
