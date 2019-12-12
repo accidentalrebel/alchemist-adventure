@@ -17,6 +17,7 @@ public class StatClass
 	public bool isDead; // Added Death mode -Pam
 	public bool hasAttacked; //Added Attack status -Pam
 	public int BNSPWR; //Added a Bonus PWR variable for buffs -Pam
+	public Sprite thissprite;
 
 		
 	public StatClass()
