@@ -24,12 +24,16 @@ public class CraftingScript : MonoBehaviour {
 	private GameObject _instance;
 	public GameObject POTIONprefab;
 	public Transform cauldron;
+	private Sprite[] ingICONS = Resources.LoadAll("Items");
+	private Sprite[] potICONS = Resources.LoadAll("Potions");
+	/*
 	public Sprite HP;
 	public Sprite ATK;
 	public Sprite PSN;
 	public Sprite SPD;
 	public Sprite STN;
 	public Sprite CNF;
+	*/
 	
 	//For selecting Ingredient
 	public TMP_Text[] itemText = new TMP_Text[3];
@@ -42,9 +46,9 @@ public class CraftingScript : MonoBehaviour {
 	Transform[] Ingredients = Shelf.getChild();
 	
 	//for belt
-	https://docs.unity3d.com/ScriptReference/SpriteRenderer-sprite.html
+	//https://docs.unity3d.com/ScriptReference/SpriteRenderer-sprite.html
 	public StatClass[] Belt = new StatClass[3];
-	public string whichBelt = "";
+	//public string whichBelt = "";
 	public Sprite beltDefault;
 	
 	//private GameObject childObj;
@@ -85,8 +89,6 @@ public class CraftingScript : MonoBehaviour {
 		items.Add(new StatClass("WTRCnf", 0, 0, "CNF", 3, 0)); //new
 		items.Add(new StatClass("OILCnf", 0, 0, "CNF", 4, 0)); //new
 		items.Add(new StatClass("WINCnf", 0, 0, "CNF", 5, 0)); //new
-		
-		
 		//set invcount from prepphase
 		for (int x = 0; x < 9; x++)
 		{
@@ -96,6 +98,18 @@ public class CraftingScript : MonoBehaviour {
 			{
 				invcount[x]= Player.invmanager.count[y];
 			}
+			}
+		}
+		//set item icon
+		foreach (var icon in ingICONS)
+		{
+			for(int x = 0; x < ingICONS.Count; x++)
+			{
+				if(icon.name == items[x].NAME)
+				{
+					items[x].thissprite = icon;
+					return;
+				}
 			}
 		}
 
@@ -174,10 +188,10 @@ public class CraftingScript : MonoBehaviour {
 		}
 		return null;
 	}
-	
-	//Crafting Function
-    public void Craft(string BASE, string frsting,string scnding)
-    {
+	}
+		//Crafting Function
+		public void Craft(string BASE, string frsting,string scnding)
+		{
 		StatClass potion = null;
       if(BASE == "Water")
 		{
@@ -187,19 +201,19 @@ public class CraftingScript : MonoBehaviour {
 				if(scnding == "Venom")
 				{
 					potion = getitembyID("WTRVen");
-					POTIONprefab.GetComponent<Image>().sprite = PSN;
+					//POTIONprefab.GetComponent<Image>().sprite = PSN;
 					invcount[6] -=1;				
 				}
 				else if(scnding == "Salts")
 				{
 					potion = getitembyID("WTRStn");
-					POTIONprefab.GetComponent<Image>().sprite = STN;
+					//POTIONprefab.GetComponent<Image>().sprite = STN;
 					invcount[7] -=1;
 				}
 				else if(scnding == "Incense")
 				{
 					potion = getitembyID("WTRCnf");
-					POTIONprefab.GetComponent<Image>().sprite = CNF;
+					//POTIONprefab.GetComponent<Image>().sprite = CNF;
 					invcount[8] -=1;
 				}
 				for(int x = 0; x < invcount.Length;x++)
@@ -214,20 +228,20 @@ public class CraftingScript : MonoBehaviour {
 			else if(frsting == "Herb")
 			{
 				potion = getitembyID("WTRhrb");
-				POTIONprefab.GetComponent<Image>().sprite = HP;
+				//POTIONprefab.GetComponent<Image>().sprite = HP;
 				invcount[3] -=1;
 			}
 			else if(frsting == "Mushroom")
 			{
 				potion = getitembyID("WTRpow");
-				POTIONprefab.GetComponent<Image>().sprite = ATK;
+				//POTIONprefab.GetComponent<Image>().sprite = ATK;
 				invcount[4] -=1;
 			}
 			//new items
 			else if(frsting == "Coffee")
 			{
 				potion = getitembyID("WTRspd");
-				POTIONprefab.GetComponent<Image>().sprite = SPD;
+				//POTIONprefab.GetComponent<Image>().sprite = SPD;
 				invcount[5] -=1;
 			}
 		}
@@ -239,7 +253,7 @@ public class CraftingScript : MonoBehaviour {
 				if(scnding == "Venom")
 				{
 					potion = getitembyID("WINVen");
-					POTIONprefab.GetComponent<Image>().sprite = PSN;
+					//POTIONprefab.GetComponent<Image>().sprite = PSN;
 					invcount[6] -=1;
 					if(frsting == "Herb")
 					{
@@ -260,7 +274,7 @@ public class CraftingScript : MonoBehaviour {
 				if(scnding == "Salts")
 				{
 					potion = getitembyID("WINStn");
-					POTIONprefab.GetComponent<Image>().sprite = STN;
+					//POTIONprefab.GetComponent<Image>().sprite = STN;
 					invcount[7] -=1;
 						if(frsting == "Herb")
 						{							
@@ -281,7 +295,7 @@ public class CraftingScript : MonoBehaviour {
 				if(scnding == "Incense")
 				{
 					potion = getitembyID("WINCnf");
-					POTIONprefab.GetComponent<Image>().sprite = CNF;
+					//POTIONprefab.GetComponent<Image>().sprite = CNF;
 					invcount[8] -=1;
 						if(frsting == "Herb")
 						{
@@ -303,19 +317,19 @@ public class CraftingScript : MonoBehaviour {
 			else if(frsting == "Herb")
 				{
 					potion = getitembyID("WINhrb");
-					POTIONprefab.GetComponent<Image>().sprite = HP;
+					//POTIONprefab.GetComponent<Image>().sprite = HP;
 					invcount[3] -=1;
 				}
 			else if(frsting == "Mushroom")
 				{
 					potion = getitembyID("WINpow");
-					POTIONprefab.GetComponent<Image>().sprite = ATK;
+					//POTIONprefab.GetComponent<Image>().sprite = ATK;
 					invcount[4] -=1;
 				}
 			else if(frsting == "Coffee")
 				{
 					potion = getitembyID("WINspd");
-					POTIONprefab.GetComponent<Image>().sprite = SPD;
+					//POTIONprefab.GetComponent<Image>().sprite = SPD;
 					invcount[5] -=1;
 				}
 		}
@@ -330,7 +344,7 @@ public class CraftingScript : MonoBehaviour {
 				if(scnding == "Venom")
 				{
 					potion = getitembyID("OILVen");
-					POTIONprefab.GetComponent<Image>().sprite = PSN;
+					//POTIONprefab.GetComponent<Image>().sprite = PSN;
 					invcount[6] -=1;
 					potion.STATUS = "PSN";
 		
@@ -353,7 +367,7 @@ public class CraftingScript : MonoBehaviour {
 				if(scnding == "Salts")
 				{
 					potion = getitembyID("OILStn");
-					POTIONprefab.GetComponent<Image>().sprite = STN;
+					//POTIONprefab.GetComponent<Image>().sprite = STN;
 					invcount[7] -=1;
 					potion.STATUS = "STN";
 		
@@ -376,7 +390,7 @@ public class CraftingScript : MonoBehaviour {
 				if(scnding == "Incense")
 				{
 					potion = getitembyID("OILCnf");
-					POTIONprefab.GetComponent<Image>().sprite = CNF;
+					//POTIONprefab.GetComponent<Image>().sprite = CNF;
 					invcount[8] -=1;
 					potion.STATUS = "CNF";
 		
@@ -401,33 +415,40 @@ public class CraftingScript : MonoBehaviour {
 			{
 				potion = getitembyID("OILhrb");
 				potion.HP = oilRDM;
-				POTIONprefab.GetComponent<Image>().sprite = HP;
+				//POTIONprefab.GetComponent<Image>().sprite = HP;
 				invcount[3] -=1;
 			}
 			else if(frsting == "Mushroom")
 			{
 				potion = getitembyID("OILpow");
 				potion.PWR = oilRDM;
-				POTIONprefab.GetComponent<Image>().sprite = ATK;
+				//POTIONprefab.GetComponent<Image>().sprite = ATK;
 				invcount[4] -=1;
 			}
 			else if(frsting == "Coffee")
 			{
 				potion = getitembyID("OILspd");
 				potion.PWR = oilRDM;
-				POTIONprefab.GetComponent<Image>().sprite = SPD;
+				//POTIONprefab.GetComponent<Image>().sprite = SPD;
 				invcount[5] -=1;
 			}
 		}
+		
+		foreach (var Pot in potICONS)
+		{
+			if(Pot.name == potion.STATUS)
+			{
+				POTIONprefab.GetComponent<Image>().sprite = Pot;
+			}
+		}
+		
 		PlayerPTN = potion;		
 		//cauldron cooldown
 		cauldronCD = potion.SPD;
 		//Debug.Log("Success " + BASE + frsting + scnding + PlayerPTN.NAME);
 	}
-	//Crafting Function
 		
-	
-		
+		//give potion to hero
 		public void giveHero()
 		{
 			string buttonname = EventSystem.current.currentSelectedGameObject.name;
@@ -445,8 +466,6 @@ public class CraftingScript : MonoBehaviour {
 			UsePotion(Hero, PlayerPTN);
 			}
 		}
-		
-		
 		
 		//Use Potion on Hero
 		public void UsePotion(StatClass Hero, StatClass Potion)
@@ -548,7 +567,6 @@ public class CraftingScript : MonoBehaviour {
 			theitem.GetComponent<Image>.sprite = beltDefault;
 			
 		}
-		//Use Potion on Hero
 		
 		//Mix Button
 		public void OnMix()
@@ -622,7 +640,6 @@ public class CraftingScript : MonoBehaviour {
 				Debug.Log("sumthing wrong?" + haspotion + cauldronCD + cancraft);
 			}
 		}
-		//Mix Button
 		
 		//add items from drops
 		public void DropStuff()
@@ -644,7 +661,6 @@ public class CraftingScript : MonoBehaviour {
 				Droprate -=3;
 			}
 		}
-		//add items from drop
 		
 		//shelf stuff
 		public void itemSelect()
@@ -745,7 +761,6 @@ public class CraftingScript : MonoBehaviour {
 			}	
 		}
 		
-		
 		//Potion Belt
 		public void potionBelt()
 		{
@@ -797,8 +812,6 @@ public class CraftingScript : MonoBehaviour {
 				}
 			}			
 		}
-		
-		
 		
 		//end inventory
 		public void endInv()
